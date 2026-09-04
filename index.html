@@ -9,6 +9,7 @@
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
     .main-container { max-width: 1300px; margin: 0 auto; }
     
+    /* Layout Wrapper */
     .portal-main-layout {
         display: grid;
         grid-template-columns: 1fr 380px;
@@ -23,6 +24,7 @@
         gap: 20px;
     }
 
+    /* Top Banner with Animated Paytm Branding */
     .top-blue-banner {
         position: relative;
         width: 100%;
@@ -38,6 +40,7 @@
         overflow: hidden;
     }
 
+    /* Background Animated Paytm Watermark / Elements */
     .animated-bg-text {
         position: absolute;
         right: 40px;
@@ -49,6 +52,12 @@
         letter-spacing: -2px;
         pointer-events: none;
         white-space: nowrap;
+        animation: pulsePaytm 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulsePaytm {
+        0% { opacity: 0.05; transform: translateY(-50%) scale(0.95); }
+        100% { opacity: 0.2; transform: translateY(-50%) scale(1.05); }
     }
 
     .banner-inner-content {
@@ -74,21 +83,19 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         flex-shrink: 0;
         border: 3px solid #00baf2;
+        animation: bounceLogo 2s ease-in-out infinite;
     }
     .paytm-logo-badge span { color: #00baf2; }
 
-    .banner-text-group h1 { 
-        font-size: 28px; 
-        font-weight: 800; 
-        margin-bottom: 5px; 
-        line-height: 1.2; 
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        min-height: 34px;
-        color: #ffffff;
+    @keyframes bounceLogo {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
     }
 
+    .banner-text-group h1 { font-size: 28px; font-weight: 800; margin-bottom: 5px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
     .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
 
+    /* Quick Search Box */
     .search-card-box {
         background: #ffffff;
         padding: 22px 25px;
@@ -101,6 +108,7 @@
     .search-flex-row input { flex: 1; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; }
     .search-flex-row input:focus { border-color: #00baf2; box-shadow: 0 0 0 3px rgba(0,186,242,0.15); }
 
+    /* Right Side: Full Size Pavan Image Panel */
     .right-showcase-panel {
         background: white;
         border-radius: 16px;
@@ -147,6 +155,7 @@
     .icon-item-box { text-align: center; }
     .icon-item-box span { display: block; font-size: 10px; color: #475569; font-weight: 700; margin-top: 4px; }
 
+    /* Tabs & Cards */
     .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 14px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 10px; cursor: pointer; color: #334155; font-size: 15px; transition: all 0.2s; }
     .tab-btn.active { background: #002e6e; color: #fff; box-shadow: 0 4px 12px rgba(0,46,110,0.2); }
@@ -156,6 +165,7 @@
     .btn { background: #00baf2; color: #fff; border: none; padding: 14px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 15px; transition: background 0.2s; }
     .btn:hover { background: #0099c8; }
     .btn-dark { background: #002e6e; color: white; }
+    .btn-danger { background: #ef4444; color: white; display: none; } /* Default గా డిలీట్ బటన్ కనిపించదు */
 
     .profile-card-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
     .profile-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
@@ -183,7 +193,6 @@
     .btn-active-state { background: #22c55e; color: white; }
     .btn-inactive-state { background: #ef4444; color: white; }
     .btn-edit { background: #f59e0b; color: white; }
-    .btn-danger { background: #ef4444; color: white; display: none; }
     .table-photo { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; }
     
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100; }
@@ -210,7 +219,7 @@
         <div class="banner-inner-content">
           <div class="paytm-logo-badge">Pay<span>tm</span></div>
           <div class="banner-text-group">
-            <h1 id="waveHeading"></h1>
+            <h1>Paytm Employee Verification Portal</h1>
             <p>Authorized Brand Promoter Portal</p>
           </div>
         </div>
@@ -388,29 +397,7 @@
   let teamDatabase = [];
   let uploadedImageBase64New = "";
   let uploadedImageBase64Edit = "";
-  let isDeleteModeUnlocked = false;
-
-  const textToType = "Paytm Employee Verification Portal";
-  let charIndex = 0;
-  
-  function startTypewriter() {
-    const headingElem = document.getElementById("waveHeading");
-    if (!headingElem) return;
-    
-    if (charIndex === 0) {
-      headingElem.innerHTML = "";
-    }
-
-    if (charIndex < textToType.length) {
-      headingElem.innerHTML += textToType.charAt(charIndex);
-      charIndex++;
-      setTimeout(startTypewriter, 55);
-    }
-  }
-
-  window.onload = function() {
-    startTypewriter();
-  };
+  let isDeleteModeUnlocked = false; // డిలీట్ లాక్ స్టేటస్
 
   dbRef.on('value', (snapshot) => {
     const data = snapshot.val();
@@ -420,6 +407,7 @@
 
   async function verifyPin(inputPin) { return inputPin === ADMIN_PIN; }
 
+  // అడ్మిన్ పిన్ ఎంటర్ చేసి డిలీట్ బటన్‌లను ఓపెన్/క్లోజ్ చేయడానికి
   async function toggleAdminDeleteMode() {
     if (!isDeleteModeUnlocked) {
       const pin = prompt("Enter Admin PIN to unlock Delete option:");
@@ -499,7 +487,7 @@
             ${user.status === 'Active' ? 'Deactivate' : 'Activate'}
           </button>
           <button class="toggle-btn btn-edit" onclick="openEditModal(${index})">Edit</button>
-          <button class="toggle-btn btn-danger" id="del-btn-${user.id}" style="display: ${isDeleteModeUnlocked ? 'inline-block' : 'none'};" onclick="deleteMember('${user.id}')">Delete</button>
+          <button class="toggle-btn btn-danger" style="display: ${isDeleteModeUnlocked ? 'inline-block' : 'none'};" onclick="deleteMember('${user.id}')">Delete</button>
         </td>
       `;
       tbody.appendChild(tr);
