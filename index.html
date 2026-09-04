@@ -31,7 +31,7 @@
     /* Search Box Section */
     .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
     .search-box { display: flex; gap: 10px; margin-top: 10px; }
-    .search-box input, .form-group input, .form-group select { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
+    .search-box input, .form-group input, .form-group select { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; width: 100%; }
     .btn { background: #00baf2; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
     .btn:hover { background: #0099c8; }
     .btn-dark { background: #002e6e; color: white; }
@@ -168,10 +168,14 @@
       <h3 style="margin-bottom: 15px;">Register / Add New Employee</h3>
       <form id="addMemberForm" onsubmit="addNewMember(event)">
         <div class="form-group"><label>Employee ID</label><input type="text" id="newId" required></div>
+        
+        <!-- PC FILE UPLOAD -->
         <div class="form-group">
-          <label>Photo URL / Link</label>
-          <input type="text" id="newPhotoUrl" placeholder="Image Link" value="https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png">
+          <label>Choose Photo from PC</label>
+          <input type="file" id="newPhotoFile" accept="image/*" onchange="convertImageToBase64(event)" style="padding: 8px; background: #f8fafc;">
+          <input type="hidden" id="newPhotoUrl" value="https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png">
         </div>
+
         <div class="form-group"><label>Full Name</label><input type="text" id="newName" required></div>
         <div class="form-group"><label>Designation</label><input type="text" id="newRole" required></div>
         <div class="form-group"><label>Department</label><input type="text" id="newDept" required></div>
@@ -198,7 +202,14 @@
     <form onsubmit="saveEditedMember(event)">
       <input type="hidden" id="editIndex">
       <div class="form-group"><label>Employee ID</label><input type="text" id="editId" readonly style="background:#e2e8f0;"></div>
-      <div class="form-group"><label>Photo URL</label><input type="text" id="editPhotoUrl"></div>
+      
+      <!-- EDIT PC FILE UPLOAD -->
+      <div class="form-group">
+        <label>Update Photo from PC</label>
+        <input type="file" id="editPhotoFile" accept="image/*" onchange="convertEditImageToBase64(event)" style="padding: 8px; background: #f8fafc;">
+        <input type="hidden" id="editPhotoUrl">
+      </div>
+
       <div class="form-group"><label>Name</label><input type="text" id="editName" required></div>
       <div class="form-group"><label>Role</label><input type="text" id="editRole" required></div>
       <div class="form-group"><label>Department</label><input type="text" id="editDept" required></div>
@@ -264,6 +275,30 @@
     document.getElementById('adminTab').classList.toggle('hidden', tab !== 'admin');
     document.querySelectorAll('.tab-btn')[0].classList.toggle('active', tab === 'search');
     document.querySelectorAll('.tab-btn')[1].classList.toggle('active', tab === 'admin');
+  }
+
+  // Convert File to Base64 for New Member
+  function convertImageToBase64(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('newPhotoUrl').value = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Convert File to Base64 for Edit Member
+  function convertEditImageToBase64(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('editPhotoUrl').value = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   function searchUser() {
@@ -354,7 +389,7 @@
     const empId = document.getElementById('editId').value;
     let photo = document.getElementById('editPhotoUrl').value.trim();
 
-    database.ref('employees/' + empId).update({
+    const updateData = {
       name: document.getElementById('editName').value,
       role: document.getElementById('editRole').value,
       department: document.getElementById('editDept').value,
@@ -362,9 +397,14 @@
       doj: document.getElementById('editDoj').value,
       phone: document.getElementById('editPhone').value,
       bloodGroup: document.getElementById('editBlood').value,
-      emergencyContact: document.getElementById('editEmergency').value,
-      photoUrl: photo
-    });
+      emergencyContact: document.getElementById('editEmergency').value
+    };
+
+    if(photo) {
+      updateData.photoUrl = photo;
+    }
+
+    database.ref('employees/' + empId).update(updateData);
     closeModal();
   }
 
