@@ -9,7 +9,6 @@
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
     .main-container { max-width: 1300px; margin: 0 auto; }
     
-    /* Layout Wrapper */
     .portal-main-layout {
         display: grid;
         grid-template-columns: 1fr 380px;
@@ -24,7 +23,6 @@
         gap: 20px;
     }
 
-    /* Top Banner with Animated Paytm Branding */
     .top-blue-banner {
         position: relative;
         width: 100%;
@@ -51,12 +49,6 @@
         letter-spacing: -2px;
         pointer-events: none;
         white-space: nowrap;
-        animation: pulsePaytm 3s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulsePaytm {
-        0% { opacity: 0.05; transform: translateY(-50%) scale(0.95); }
-        100% { opacity: 0.2; transform: translateY(-50%) scale(1.05); }
     }
 
     .banner-inner-content {
@@ -82,14 +74,8 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         flex-shrink: 0;
         border: 3px solid #00baf2;
-        animation: bounceLogo 2s ease-in-out infinite;
     }
     .paytm-logo-badge span { color: #00baf2; }
-
-    @keyframes bounceLogo {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
-    }
 
     .banner-text-group h1 { 
         font-size: 28px; 
@@ -103,7 +89,6 @@
 
     .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
 
-    /* Quick Search Box */
     .search-card-box {
         background: #ffffff;
         padding: 22px 25px;
@@ -116,7 +101,6 @@
     .search-flex-row input { flex: 1; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; }
     .search-flex-row input:focus { border-color: #00baf2; box-shadow: 0 0 0 3px rgba(0,186,242,0.15); }
 
-    /* Right Side: Full Size Pavan Image Panel */
     .right-showcase-panel {
         background: white;
         border-radius: 16px;
@@ -163,7 +147,6 @@
     .icon-item-box { text-align: center; }
     .icon-item-box span { display: block; font-size: 10px; color: #475569; font-weight: 700; margin-top: 4px; }
 
-    /* Tabs & Cards */
     .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 14px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 10px; cursor: pointer; color: #334155; font-size: 15px; transition: all 0.2s; }
     .tab-btn.active { background: #002e6e; color: #fff; box-shadow: 0 4px 12px rgba(0,46,110,0.2); }
@@ -218,13 +201,10 @@
 
 <div class="main-container">
   
-  <!-- Main Grid Layout -->
   <div class="portal-main-layout">
     
-    <!-- Left Side Container -->
     <div class="left-content-area">
       
-      <!-- Top Banner with Animated Paytm Branding -->
       <div class="top-blue-banner">
         <div class="animated-bg-text">Paytm Trust</div>
         <div class="banner-inner-content">
@@ -236,7 +216,6 @@
         </div>
       </div>
 
-      <!-- Quick Search Box -->
       <div class="search-card-box">
         <h3>Quick Employee Search</h3>
         <div class="search-flex-row">
@@ -246,7 +225,6 @@
         <p id="errorText" class="error-msg">No employee found with this ID!</p>
       </div>
 
-      <!-- Tabs Navigation -->
       <div class="tabs" style="margin-bottom: 0;">
         <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
         <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
@@ -254,7 +232,6 @@
 
     </div>
 
-    <!-- Right Side: Full Size Pavan Image Showcase Panel -->
     <div class="right-showcase-panel">
       <div class="showcase-image-wrapper">
         <img src="new-photo.png.png" alt="Pavan Showcase">
@@ -287,7 +264,6 @@
 
   </div>
 
-  <!-- SEARCH RESULT SECTION -->
   <div id="searchTab">
     <div class="card hidden" id="resultCard" style="margin-top: 10px;">
       <div class="profile-card-header">
@@ -311,7 +287,6 @@
     </div>
   </div>
 
-  <!-- ADMIN SECTION -->
   <div id="adminTab" class="hidden" style="margin-top: 10px;">
     <div class="card">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -319,7 +294,6 @@
           <h3 style="margin-bottom: 5px; color: #002e6e;">Team Members Management</h3>
           <p style="font-size: 12px; color: #15803d; font-weight: 600;">🟢 Live Firebase Cloud Database Connected</p>
         </div>
-        <!-- ADMIN UNLOCK BUTTON FOR DELETE -->
         <button class="btn" id="adminAuthBtn" onclick="toggleAdminDeleteMode()" style="padding: 8px 16px; font-size: 13px; background: #002e6e;">Admin Unlock (Delete)</button>
       </div>
 
@@ -367,7 +341,6 @@
 
 </div>
 
-<!-- EDIT MODAL -->
 <div id="editModal" class="modal">
   <div class="modal-content">
     <h3 style="margin-bottom: 15px; color: #002e6e;">Edit Employee Details</h3>
@@ -417,7 +390,6 @@
   let uploadedImageBase64Edit = "";
   let isDeleteModeUnlocked = false;
 
-  // Stable Typewriter Effect for Header
   const textToType = "Paytm Employee Verification Portal";
   let charIndex = 0;
   
@@ -440,7 +412,6 @@
     startTypewriter();
   };
 
-  // Fetching Employee Data from Firebase Realtime Database
   dbRef.on('value', (snapshot) => {
     const data = snapshot.val();
     teamDatabase = data ? Object.values(data) : [];
@@ -449,7 +420,6 @@
 
   async function verifyPin(inputPin) { return inputPin === ADMIN_PIN; }
 
-  // Admin PIN Check for Deleting & Unlocking Delete Button
   async function toggleAdminDeleteMode() {
     if (!isDeleteModeUnlocked) {
       const pin = prompt("Enter Admin PIN to unlock Delete option:");
@@ -515,6 +485,7 @@
 
   function renderAdminTable() {
     const tbody = document.getElementById('adminTableBody');
+    if (!tbody) return;
     tbody.innerHTML = '';
     teamDatabase.forEach((user, index) => {
       const tr = document.createElement('tr');
