@@ -7,46 +7,70 @@
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
-    .main-container { max-width: 800px; margin: 0 auto; }
+    .main-container { max-width: 1100px; margin: 0 auto; }
     
-    .header { text-align: center; margin-bottom: 25px; }
-    .header h1 { font-size: 24px; color: #002e6e; margin-bottom: 5px; }
-    .header p { color: #64748b; font-size: 14px; }
-
-    /* Profile Image Styling Added Here */
-    .profile-container { text-align: center; margin-bottom: 15px; }
+    /* Big Banner Section (As requested) */
+    .hero-banner {
+        position: relative;
+        width: 100%;
+        min-height: 280px;
+        background: linear-gradient(rgba(0, 46, 110, 0.8), rgba(0, 186, 242, 0.8)), url('new-photo.png.png') no-repeat center center;
+        background-size: cover;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 30px 40px;
+        color: white;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        margin-bottom: 25px;
+        gap: 30px;
+    }
+    .banner-profile {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
     .profile-img {
-        width: 130px;
-        height: 130px;
+        width: 140px;
+        height: 140px;
         border-radius: 50%;
         object-fit: cover;
-        border: 3px solid #002e6e;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        border: 4px solid #ffffff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        background: #fff;
     }
+    .banner-title h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+    .banner-title p { font-size: 14px; color: #e0f2fe; font-weight: 500; }
 
-    /* Nav Tabs */
+    .banner-search {
+        flex: 1;
+        max-width: 420px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .banner-search h3 { font-size: 15px; color: #002e6e; margin-bottom: 10px; }
+    .search-box-flex { display: flex; gap: 8px; }
+    .search-box-flex input { flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; }
+    
+    /* Tabs & Cards */
     .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 12px; border: none; background: #cbd5e1; font-weight: bold; border-radius: 6px; cursor: pointer; color: #0f172a; }
     .tab-btn.active { background: #002e6e; color: #fff; }
 
     .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
     
-    /* Search Bar */
-    .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
-    .search-box input, .form-group input, .form-group select { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
-    .btn { background: #00baf2; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    .btn { background: #00baf2; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; }
     .btn:hover { background: #0099c8; }
     .btn-dark { background: #002e6e; color: white; }
-    .btn-dark:hover { background: #001f4d; }
     .btn-danger { background: #ef4444; color: white; }
-    .btn-danger:hover { background: #dc2626; }
 
-    /* Profile Card */
     .profile-card-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
-    .profile-photo { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
+    .profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
     .profile-info { flex: 1; }
 
-    /* Badges */
     .status-badge { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; display: inline-block; margin-top: 8px; }
     .status-badge.active { background-color: #dcfce7; color: #15803d; }
     .status-badge.inactive { background-color: #fee2e2; color: #b91c1c; }
@@ -55,29 +79,32 @@
     .detail-item label { display: block; font-size: 11px; color: #64748b; text-transform: uppercase; margin-bottom: 2px; }
     .detail-item span { font-size: 15px; font-weight: 600; }
     
-    .error-msg { color: #dc2626; text-align: center; font-weight: bold; display: none; }
+    .error-msg { color: #dc2626; font-size: 13px; font-weight: bold; margin-top: 8px; display: none; }
 
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; }
-    .form-group input, .form-group select { width: 100%; }
+    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; }
     .hidden { display: none; }
 
     table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
-    table th, table td { padding: 10px; border: 1px solid #e2e8f0; text-align: left; vertical-align: middle; }
+    table th, table td { padding: 10px; border: 1px solid #e2e8f0; text-align: left; }
     table th { background: #f8fafc; }
     .toggle-btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; margin-right: 3px; }
     .btn-active-state { background: #22c55e; color: white; }
     .btn-inactive-state { background: #ef4444; color: white; }
     .btn-edit { background: #f59e0b; color: white; }
-    .btn-del { background: #64748b; color: white; }
-    
-    .table-photo { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1; }
+    .table-photo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
     
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100; }
     .modal-content { background: white; padding: 20px; border-radius: 10px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+
+    @media (max-width: 768px) {
+      .hero-banner { flex-direction: column; text-align: center; padding: 20px; }
+      .banner-profile { flex-direction: column; }
+      .banner-search { width: 100%; }
+    }
   </style>
 
-  <!-- Firebase Live Database SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
@@ -85,31 +112,33 @@
 
 <div class="main-container">
   
-  <!-- Profile Image Added on Top -->
-  <div class="profile-container">
-      <img src="new-photo.png" alt="Pavan - Paytm Brand Promoter" class="profile-img">
-  </div>
+  <!-- Large Banner Section -->
+  <div class="hero-banner">
+    <div class="banner-profile">
+      <img src="new-photo.png.png" alt="Pavan" class="profile-img">
+      <div class="banner-title">
+        <h1>Paytm Employee Verification Portal</h1>
+        <p>Authorized Brand Promoter Portal</p>
+      </div>
+    </div>
 
-  <div class="header">
-    <h1>Paytm Employee Verification Portal</h1>
-    <p>Authorized Paytm Brand Promoter</p>
-  </div>
-
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('search')">Search Details</button>
-    <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
-  </div>
-
-  <!-- SEARCH SECTION -->
-  <div id="searchTab">
-    <div class="card">
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Enter Employee ID (e.g., 20084278, 66646)">
+    <div class="banner-search">
+      <h3>Quick Employee Search</h3>
+      <div class="search-box-flex">
+        <input type="text" id="searchInput" placeholder="Enter ID (e.g., 66646)">
         <button class="btn" onclick="searchUser()">Search</button>
       </div>
       <p id="errorText" class="error-msg">No employee found with this ID!</p>
     </div>
+  </div>
 
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
+    <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
+  </div>
+
+  <!-- SEARCH RESULT SECTION -->
+  <div id="searchTab">
     <div class="card hidden" id="resultCard">
       <div class="profile-card-header">
         <img id="resPhoto" class="profile-photo" src="" alt="Employee Photo" onerror="this.src='https://via.placeholder.com/150'">
