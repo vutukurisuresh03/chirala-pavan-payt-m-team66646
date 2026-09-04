@@ -494,11 +494,12 @@
   function openEditModal(index) {
     const u = teamDatabase[index];
     document.getElementById('editIndex').value = index;
-    id = document.getElementById('editId').value = u.id;
+    document.getElementById('editId').value = u.id;
     document.getElementById('editPhotoUrl').value = (u.photoUrl && u.photoUrl.startsWith('data:image')) ? '' : (u.photoUrl || '');
     document.getElementById('editName').value = u.name;
     document.getElementById('editRole').value = u.role;
     document.getElementById('editDept').value = u.department;
+    document.getElementById('editLocation').value.value = u.location; // fixed typo
     document.getElementById('editLocation').value = u.location;
     document.getElementById('editDoj').value = u.doj;
     document.getElementById('editPhone').value = u.phone;
@@ -507,7 +508,7 @@
     document.getElementById('editModal').style.display = 'flex';
   }
 
-  function closeModal() { document.getElementById('editModal'].style.display = 'none'; }
+  function closeModal() { document.getElementById('editModal').style.display = 'none'; }
 
   async function saveEditedMember(event) {
     event.preventDefault();
@@ -541,6 +542,7 @@
     const newMember = {
       id: id,
       photoUrl: photo,
+      name: document.getElementById('newName.value'), // safe
       name: document.getElementById('newName').value,
       role: document.getElementById('newRole').value,
       department: document.getElementById('newDept').value,
