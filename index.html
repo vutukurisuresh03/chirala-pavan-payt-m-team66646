@@ -11,7 +11,7 @@
     
     .header { text-align: center; margin-bottom: 25px; }
     .header h1 { font-size: 24px; color: #002e6e; margin-bottom: 5px; }
-    .header p { color: #64748b; font-size: 14px; }
+    .header p { color: #64748b; font-size: 14px; min-height: 20px; font-weight: 500; }
 
     /* Nav Tabs */
     .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -30,7 +30,7 @@
     .btn-danger { background: #ef4444; color: white; }
     .btn-danger:hover { background: #dc2626; }
 
-    /* Profile Card - Expanded Photo Size for HD Clarity */
+    /* Profile Card */
     .profile-card-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
     .profile-photo { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
     .profile-info { flex: 1; }
@@ -60,7 +60,6 @@
     .btn-edit { background: #f59e0b; color: white; }
     .btn-del { background: #64748b; color: white; }
     
-    /* Table Photo Size Increased for Better Quality */
     .table-photo { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 2px solid #cbd5e1; }
     
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100; }
@@ -77,7 +76,7 @@
   
   <div class="header">
     <h1>Paytm Employee Verification Portal</h1>
-    <p>Search job status and personal details using Employee ID</p>
+    <p id="typewriterText"></p>
   </div>
 
   <div class="tabs">
@@ -145,7 +144,7 @@
         <div class="form-group">
           <label>Upload Photo File (or Link)</label>
           <input type="file" accept="image/*" onchange="convertImageToBase64(this, 'new')">
-          <input type="text" id="newPhotoUrl" placeholder="or Paste Image Link" style="margin-top: 5px;">
+          <input type="text" id="newPhotoUrl" placeholder="or Paste Image Link" style="margin-top: 5px;" value="new-photo.png">
         </div>
         <div class="form-group"><label>Full Name</label><input type="text" id="newName" required></div>
         <div class="form-group"><label>Designation</label><input type="text" id="newRole" required></div>
@@ -195,7 +194,35 @@
 </div>
 
 <script>
-  // New Firebase Configuration (paytm-portal-new)
+  // Typewriter Animation Effect
+  const texts = ["Search job status and personal details using Employee ID", "Official Paytm Team Verification Portal"];
+  let count = 0;
+  let index = 0;
+  let currentText = "";
+  let letter = "";
+
+  (function type() {
+    if (count === texts.length) {
+      count = 0;
+    }
+    currentText = texts[count];
+    letter = currentText.slice(0, ++index);
+
+    const target = document.getElementById("typewriterText");
+    if (target) {
+      target.textContent = letter;
+    }
+
+    if (letter.length === currentText.length) {
+      count++;
+      index = 0;
+      setTimeout(type, 2000);
+    } else {
+      setTimeout(type, 80);
+    }
+  })();
+
+  // Firebase Configuration (paytm-portal-new)
   const firebaseConfig = {
     apiKey: "AIzaSyAWn4Fl8gq25WE_NyY4AZhN6vgrd6lituk",
     authDomain: "paytm-portal-new.firebaseapp.com",
@@ -241,7 +268,7 @@
     if (user) {
       document.getElementById('errorText').style.display = 'none';
       document.getElementById('resultCard').classList.remove('hidden');
-      document.getElementById('resPhoto').src = user.photoUrl || 'https://via.placeholder.com/150';
+      document.getElementById('resPhoto').src = user.photoUrl || 'new-photo.png';
       document.getElementById('resName').innerText = user.name;
       document.getElementById('resRole').innerText = user.role;
       document.getElementById('resId').innerText = user.id;
@@ -276,7 +303,7 @@
     teamDatabase.forEach((user, index) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><img src="${user.photoUrl || 'https://via.placeholder.com/150'}" class="table-photo"></td>
+        <td><img src="${user.photoUrl || 'new-photo.png'}" class="table-photo"></td>
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td><strong style="color: ${user.status === 'Active' ? '#15803d' : '#b91c1c'};">${user.status}</strong></td>
@@ -355,7 +382,7 @@
     if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
 
     const id = document.getElementById('newId').value.trim().toUpperCase();
-    let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'https://via.placeholder.com/150';
+    let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'new-photo.png';
 
     const newMember = {
       id: id,
