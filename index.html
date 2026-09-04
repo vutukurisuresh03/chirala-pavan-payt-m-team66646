@@ -9,85 +9,102 @@
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
     .main-container { max-width: 1300px; margin: 0 auto; }
     
-    /* Exact layout matching your screenshot design */
-    .top-design-container {
+    /* Layout Wrapper */
+    .portal-main-layout {
         display: grid;
-        grid-template-columns: 1.3fr 1fr;
-        gap: 20px;
-        align-items: stretch;
+        grid-template-columns: 1fr 380px;
+        gap: 25px;
+        align-items: start;
         margin-bottom: 25px;
     }
 
-    /* Left Side Wrapper */
-    .left-section-box {
+    .left-content-area {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 20px;
     }
 
-    /* Top Banner (Header portion from screenshot) */
-    .header-banner {
+    /* Top Banner with Paytm Logo & Face Perfectly Visible */
+    .top-blue-banner {
         position: relative;
         width: 100%;
-        min-height: 190px;
-        background: linear-gradient(rgba(0, 46, 110, 0.85), rgba(0, 186, 242, 0.85)), url('new-photo.png.png') no-repeat center 20%;
+        min-height: 240px;
+        background: linear-gradient(135deg, rgba(0, 46, 110, 0.9), rgba(0, 186, 242, 0.85)), url('new-photo.png.png') no-repeat center 15%;
         background-size: cover;
-        border-radius: 12px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 25px 30px;
+        padding: 30px 40px;
         color: white;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        overflow: hidden;
     }
-    .header-left-content {
+
+    /* Fixing background image focus so face is clearly visible instead of just beard */
+    .top-blue-banner::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at 75% 30%, rgba(0, 186, 242, 0.4) 0%, rgba(0, 46, 110, 0.75) 80%);
+        z-index: 1;
+    }
+
+    .banner-inner-content {
+        position: relative;
+        z-index: 2;
         display: flex;
         align-items: center;
-        gap: 20px;
+        gap: 25px;
+        width: 100%;
     }
-    .paytm-logo-circle {
-        width: 75px;
-        height: 75px;
-        background: #00baf2;
+
+    .paytm-logo-badge {
+        width: 85px;
+        height: 85px;
+        background: #ffffff;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 900;
-        font-size: 18px;
-        color: white;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        border: 3px solid #fff;
+        font-size: 20px;
+        color: #002e6e;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        flex-shrink: 0;
+        border: 3px solid #00baf2;
     }
-    .header-titles h1 { font-size: 26px; font-weight: 800; margin-bottom: 4px; letter-spacing: 0.3px; }
-    .header-titles p { font-size: 14px; color: #e0f2fe; font-weight: 600; }
+    .paytm-logo-badge span { color: #00baf2; }
 
-    /* Search Section Box */
+    .banner-text-group h1 { font-size: 28px; font-weight: 800; margin-bottom: 5px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+    .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+
+    /* Quick Search Box in the middle */
     .search-card-box {
         background: #ffffff;
-        padding: 20px 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        padding: 22px 25px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
         border: 1px solid #e2e8f0;
     }
-    .search-card-box h3 { font-size: 15px; color: #002e6e; margin-bottom: 10px; font-weight: 700; }
-    .search-flex-row { display: flex; gap: 10px; }
-    .search-flex-row input { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
+    .search-card-box h3 { font-size: 16px; color: #002e6e; margin-bottom: 12px; font-weight: 700; }
+    .search-flex-row { display: flex; gap: 12px; }
+    .search-flex-row input { flex: 1; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; }
+    .search-flex-row input:focus { border-color: #00baf2; box-shadow: 0 0 0 3px rgba(0,186,242,0.15); }
 
-    /* Right Side: Full Size Pavan Image Card matching screenshot */
+    /* Right Side: Full Size Pavan Image Card */
     .right-showcase-panel {
         background: white;
-        border-radius: 12px;
+        border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         border: 1px solid #e2e8f0;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
     }
     .showcase-image-wrapper {
         width: 100%;
-        height: 330px;
+        height: 440px;
         background: #f8fafc;
         position: relative;
     }
@@ -104,78 +121,69 @@
         border-top: 1px solid #f1f5f9;
     }
     .brand-title-main {
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 900;
         color: #002e6e;
         letter-spacing: -1px;
         margin-bottom: 4px;
     }
     .brand-title-main span { color: #00baf2; }
-    .showcase-footer-branding p { font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 12px; }
+    .showcase-footer-branding p { font-size: 13px; color: #64748b; font-weight: 600; margin-bottom: 15px; }
     
-    /* Icons row under the right side banner */
     .feature-icons-row {
         display: flex;
-        justify-content: center;
-        gap: 18px;
-        padding-top: 5px;
+        justify-content: space-around;
+        padding-top: 8px;
+        border-top: 1px solid #f1f5f9;
     }
-    .icon-item-box {
-        text-align: center;
-    }
-    .icon-item-box span {
-        display: block;
-        font-size: 10px;
-        color: #475569;
-        font-weight: 700;
-        margin-top: 2px;
-    }
+    .icon-item-box { text-align: center; }
+    .icon-item-box span { display: block; font-size: 10px; color: #475569; font-weight: 700; margin-top: 4px; }
 
     /* Tabs & Cards */
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-    .tab-btn { flex: 1; padding: 12px; border: none; background: #cbd5e1; font-weight: bold; border-radius: 6px; cursor: pointer; color: #0f172a; font-size: 14px; }
-    .tab-btn.active { background: #002e6e; color: #fff; }
+    .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
+    .tab-btn { flex: 1; padding: 14px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 10px; cursor: pointer; color: #334155; font-size: 15px; transition: all 0.2s; }
+    .tab-btn.active { background: #002e6e; color: #fff; box-shadow: 0 4px 12px rgba(0,46,110,0.2); }
 
-    .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    .card { background: #ffffff; padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #e2e8f0; }
     
-    .btn { background: #00baf2; color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
+    .btn { background: #00baf2; color: #fff; border: none; padding: 14px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 15px; transition: background 0.2s; }
     .btn:hover { background: #0099c8; }
     .btn-dark { background: #002e6e; color: white; }
     .btn-danger { background: #ef4444; color: white; }
 
     .profile-card-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
-    .profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
+    .profile-photo { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
     .profile-info { flex: 1; }
 
     .status-badge { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; display: inline-block; margin-top: 8px; }
     .status-badge.active { background-color: #dcfce7; color: #15803d; }
     .status-badge.inactive { background-color: #fee2e2; color: #b91c1c; }
 
-    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    .detail-item label { display: block; font-size: 11px; color: #64748b; text-transform: uppercase; margin-bottom: 2px; }
-    .detail-item span { font-size: 15px; font-weight: 600; }
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .detail-item label { display: block; font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 4px; font-weight: 600; }
+    .detail-item span { font-size: 16px; font-weight: 700; color: #0f172a; }
     
-    .error-msg { color: #dc2626; font-size: 13px; font-weight: bold; margin-top: 8px; display: none; }
+    .error-msg { color: #dc2626; font-size: 14px; font-weight: bold; margin-top: 10px; display: none; }
 
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; }
-    .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #334155; }
+    .form-group input, .form-group select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
     .hidden { display: none; }
 
     table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
-    table th, table td { padding: 10px; border: 1px solid #e2e8f0; text-align: left; }
-    table th { background: #f8fafc; }
-    .toggle-btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; margin-right: 3px; }
+    table th, table td { padding: 12px; border: 1px solid #e2e8f0; text-align: left; }
+    table th { background: #f8fafc; font-weight: 700; color: #334155; }
+    .toggle-btn { padding: 8px 14px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 12px; margin-right: 5px; }
     .btn-active-state { background: #22c55e; color: white; }
     .btn-inactive-state { background: #ef4444; color: white; }
     .btn-edit { background: #f59e0b; color: white; }
-    .table-photo { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+    .table-photo { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; }
     
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 100; }
-    .modal-content { background: white; padding: 20px; border-radius: 10px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+    .modal-content { background: white; padding: 25px; border-radius: 16px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
 
-    @media (max-width: 900px) {
-      .top-design-container { grid-template-columns: 1fr; }
+    @media (max-width: 950px) {
+      .portal-main-layout { grid-template-columns: 1fr; }
     }
   </style>
 
@@ -186,24 +194,24 @@
 
 <div class="main-container">
   
-  <!-- Exact Screenshot Layout Container -->
-  <div class="top-design-container">
+  <!-- Main Grid Layout -->
+  <div class="portal-main-layout">
     
-    <!-- Left Section: Header Banner + Quick Search Box -->
-    <div class="left-section-box">
+    <!-- Left Side Container -->
+    <div class="left-content-area">
       
-      <!-- Top Header Banner -->
-      <div class="header-banner">
-        <div class="header-left-content">
-          <div class="paytm-logo-circle">Paytm</div>
-          <div class="header-titles">
+      <!-- Top Banner with Logo, Title and Face Position Fixed -->
+      <div class="top-blue-banner">
+        <div class="banner-inner-content">
+          <div class="paytm-logo-badge">Pay<span>tm</span></div>
+          <div class="banner-text-group">
             <h1>Paytm Employee Verification Portal</h1>
             <p>Authorized Brand Promoter Portal</p>
           </div>
         </div>
       </div>
 
-      <!-- Quick Search Box -->
+      <!-- Quick Search Box (Placed immediately below top banner) -->
       <div class="search-card-box">
         <h3>Quick Employee Search</h3>
         <div class="search-flex-row">
@@ -213,9 +221,15 @@
         <p id="errorText" class="error-msg">No employee found with this ID!</p>
       </div>
 
+      <!-- Tabs Navigation (Employee Details View & Team Management) -->
+      <div class="tabs" style="margin-bottom: 0;">
+        <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
+        <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
+      </div>
+
     </div>
 
-    <!-- Right Section: Full Size Pavan Image Card matching screenshot -->
+    <!-- Right Side: Full Size Pavan Image Showcase Panel -->
     <div class="right-showcase-panel">
       <div class="showcase-image-wrapper">
         <img src="new-photo.png.png" alt="Pavan Showcase">
@@ -224,22 +238,21 @@
         <div class="brand-title-main">Pay<span>tm</span></div>
         <p>India's Most Trusted Payments Platform</p>
         
-        <!-- Icons as shown in your exact screenshot -->
         <div class="feature-icons-row">
           <div class="icon-item-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
             <span>Mobile Recharge</span>
           </div>
           <div class="icon-item-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/></svg>
             <span>Electricity Bill</span>
           </div>
           <div class="icon-item-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
             <span>DTH Recharge</span>
           </div>
           <div class="icon-item-box">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
             <span>Money Transfer</span>
           </div>
         </div>
@@ -249,19 +262,14 @@
 
   </div>
 
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
-    <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
-  </div>
-
   <!-- SEARCH RESULT SECTION -->
   <div id="searchTab">
-    <div class="card hidden" id="resultCard">
+    <div class="card hidden" id="resultCard" style="margin-top: 10px;">
       <div class="profile-card-header">
         <img id="resPhoto" class="profile-photo" src="" alt="Employee Photo" onerror="this.src='https://via.placeholder.com/150'">
         <div class="profile-info">
-          <h2 id="resName" style="font-size: 22px;">-</h2>
-          <p id="resRole" style="color: #64748b; font-size: 14px;">-</p>
+          <h2 id="resName" style="font-size: 24px; color: #002e6e;">-</h2>
+          <p id="resRole" style="color: #64748b; font-size: 15px; font-weight: 600;">-</p>
           <span class="status-badge" id="resStatus">-</span>
         </div>
       </div>
@@ -279,10 +287,10 @@
   </div>
 
   <!-- ADMIN SECTION -->
-  <div id="adminTab" class="hidden">
+  <div id="adminTab" class="hidden" style="margin-top: 10px;">
     <div class="card">
-      <h3 style="margin-bottom: 5px;">Team Members Management</h3>
-      <p style="font-size: 12px; color: #15803d; margin-bottom: 15px;">🟢 Live Firebase Cloud Database Connected</p>
+      <h3 style="margin-bottom: 5px; color: #002e6e;">Team Members Management</h3>
+      <p style="font-size: 12px; color: #15803d; margin-bottom: 15px; font-weight: 600;">🟢 Live Firebase Cloud Database Connected</p>
       <div style="overflow-x:auto;">
         <table>
           <thead>
@@ -300,7 +308,7 @@
     </div>
 
     <div class="card">
-      <h3 style="margin-bottom: 15px;">Register / Add New Employee</h3>
+      <h3 style="margin-bottom: 15px; color: #002e6e;">Register / Add New Employee</h3>
       <form id="addMemberForm" onsubmit="addNewMember(event)">
         <div class="form-group"><label>Employee ID</label><input type="text" id="newId" required></div>
         <div class="form-group">
@@ -330,7 +338,7 @@
 <!-- EDIT MODAL -->
 <div id="editModal" class="modal">
   <div class="modal-content">
-    <h3>Edit Employee Details</h3>
+    <h3 style="margin-bottom: 15px; color: #002e6e;">Edit Employee Details</h3>
     <form onsubmit="saveEditedMember(event)">
       <input type="hidden" id="editIndex">
       <div class="form-group"><label>Employee ID</label><input type="text" id="editId" readonly style="background:#e2e8f0;"></div>
@@ -347,7 +355,7 @@
       <div class="form-group"><label>Mobile</label><input type="text" id="editPhone" required></div>
       <div class="form-group"><label>Blood Group</label><input type="text" id="editBlood" required></div>
       <div class="form-group"><label>Emergency Contact</label><input type="text" id="editEmergency" required></div>
-      <div style="display:flex; gap:10px; margin-top:15px;">
+      <div style="display:flex; gap:10px; margin-top:20px;">
         <button type="submit" class="btn btn-dark" style="flex:1;">Update Cloud</button>
         <button type="button" class="btn" style="background:#64748b;" onclick="closeModal()">Cancel</button>
       </div>
@@ -488,7 +496,7 @@
     event.preventDefault();
     if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
     
-    const empId = document.getElementById('editId').value;
+    const empId = document.getElementById('editId.value') || document.getElementById('editId').value;
     const index = document.getElementById('editIndex').value;
     let photo = uploadedImageBase64Edit || document.getElementById('editPhotoUrl').value.trim() || teamDatabase[index].photoUrl;
 
