@@ -24,7 +24,7 @@
         gap: 20px;
     }
 
-    /* Top Banner with Animated Paytm Branding */
+    /* Top Banner with Wave Animated Paytm Branding */
     .top-blue-banner {
         position: relative;
         width: 100%;
@@ -40,7 +40,6 @@
         overflow: hidden;
     }
 
-    /* Background Animated Paytm Watermark / Elements */
     .animated-bg-text {
         position: absolute;
         right: 40px;
@@ -92,8 +91,79 @@
         50% { transform: translateY(-6px); }
     }
 
-    .banner-text-group h1 { font-size: 28px; font-weight: 800; margin-bottom: 5px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
-    .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+    .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); margin-top: 8px; }
+
+    /* Wave Animation Styles for Header */
+    .wave-text {
+        display: inline-flex;
+        font-size: 26px;
+        font-weight: 800;
+        line-height: 1.2;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        flex-wrap: wrap;
+        overflow: hidden;
+    }
+
+    .wave-text span {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: waveAnim 0.4s ease forwards;
+    }
+
+    /* ప్రతీ అక్షరానికి వేవ్‌లా వచ్చేలా టైమింగ్స్ */
+    .wave-text span:nth-child(1)  { animation-delay: 0.03s; }
+    .wave-text span:nth-child(2)  { animation-delay: 0.06s; }
+    .wave-text span:nth-child(3)  { animation-delay: 0.09s; }
+    .wave-text span:nth-child(4)  { animation-delay: 0.12s; }
+    .wave-text span:nth-child(5)  { animation-delay: 0.15s; }
+    .wave-text span:nth-child(6)  { animation-delay: 0.18s; }
+    .wave-text span:nth-child(7)  { animation-delay: 0.21s; }
+    .wave-text span:nth-child(8)  { animation-delay: 0.24s; }
+    .wave-text span:nth-child(9)  { animation-delay: 0.27s; }
+    .wave-text span:nth-child(10) { animation-delay: 0.30s; }
+    .wave-text span:nth-child(11) { animation-delay: 0.33s; }
+    .wave-text span:nth-child(12) { animation-delay: 0.36s; }
+    .wave-text span:nth-child(13) { animation-delay: 0.39s; }
+    .wave-text span:nth-child(14) { animation-delay: 0.42s; }
+    .wave-text span:nth-child(15) { animation-delay: 0.45s; }
+    .wave-text span:nth-child(16) { animation-delay: 0.48s; }
+    .wave-text span:nth-child(17) { animation-delay: 0.51s; }
+    .wave-text span:nth-child(18) { animation-delay: 0.54s; }
+    .wave-text span:nth-child(19) { animation-delay: 0.57s; }
+    .wave-text span:nth-child(20) { animation-delay: 0.60s; }
+    .wave-text span:nth-child(21) { animation-delay: 0.63s; }
+    .wave-text span:nth-child(22) { animation-delay: 0.66s; }
+    .wave-text span:nth-child(23) { animation-delay: 0.69s; }
+    .wave-text span:nth-child(24) { animation-delay: 0.72s; }
+    .wave-text span:nth-child(25) { animation-delay: 0.75s; }
+    .wave-text span:nth-child(26) { animation-delay: 0.78s; }
+    .wave-text span:nth-child(27) { animation-delay: 0.81s; }
+    .wave-text span:nth-child(28) { animation-delay: 0.84s; }
+    .wave-text span:nth-child(29) { animation-delay: 0.87s; }
+    .wave-text span:nth-child(30) { animation-delay: 0.90s; }
+    .wave-text span:nth-child(31) { animation-delay: 0.93s; }
+    .wave-text span:nth-child(32) { animation-delay: 0.96s; }
+
+    @keyframes waveAnim {
+        0% {
+            opacity: 0;
+            transform: translateY(20px) scale(0.6);
+        }
+        70% {
+            opacity: 1;
+            transform: translateY(-5px) scale(1.05);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .space {
+        display: inline-block;
+        width: 8px;
+    }
 
     /* Quick Search Box */
     .search-card-box {
@@ -216,13 +286,19 @@
     <!-- Left Side Container -->
     <div class="left-content-area">
       
-      <!-- Top Banner with Animated Paytm Branding -->
+      <!-- Top Banner with Animated Paytm Branding & Wave Text -->
       <div class="top-blue-banner">
         <div class="animated-bg-text">Paytm Trust</div>
         <div class="banner-inner-content">
           <div class="paytm-logo-badge">Pay<span>tm</span></div>
           <div class="banner-text-group">
-            <h1>Paytm Employee Verification Portal</h1>
+            <!-- వేవ్ యానిమేషన్ హెడ్డింగ్ -->
+            <h1 class="wave-text">
+              <span>P</span><span>a</span><span>y</span><span>t</span><span>m</span><span class="space"></span>
+              <span>E</span><span>m</span><span>p</span><span>l</span><span>o</span><span>y</span><span>e</span><span>e</span><span class="space"></span>
+              <span>V</span><span>e</span><span>r</span><span>i</span><span>f</span><span>i</span><span>c</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span><span class="space"></span>
+              <span>P</span><span>o</span><span>r</span><span>t</span><span>a</span><span>l</span>
+            </h1>
             <p>Authorized Brand Promoter Portal</p>
           </div>
         </div>
@@ -499,7 +575,6 @@
     document.getElementById('editName').value = u.name;
     document.getElementById('editRole').value = u.role;
     document.getElementById('editDept').value = u.department;
-    document.getElementById('editLocation').value.value = u.location; // fixed typo
     document.getElementById('editLocation').value = u.location;
     document.getElementById('editDoj').value = u.doj;
     document.getElementById('editPhone').value = u.phone;
@@ -542,7 +617,6 @@
     const newMember = {
       id: id,
       photoUrl: photo,
-      name: document.getElementById('newName.value'), // safe
       name: document.getElementById('newName').value,
       role: document.getElementById('newRole').value,
       department: document.getElementById('newDept').value,
