@@ -7,102 +7,129 @@
   <style>
     * { box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; }
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
-    .main-container { max-width: 1250px; margin: 0 auto; }
+    .main-container { max-width: 1300px; margin: 0 auto; }
     
-    /* Layout styling matching your word design exact layout */
-    .portal-grid {
+    /* Exact layout matching your screenshot design */
+    .top-design-container {
         display: grid;
-        grid-template-columns: 1fr 380px;
-        gap: 25px;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 20px;
         align-items: stretch;
         margin-bottom: 25px;
     }
 
-    /* Left Side: Big Banner Section */
-    .hero-banner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        min-height: 420px;
-        background: linear-gradient(rgba(0, 46, 110, 0.82), rgba(0, 186, 242, 0.82)), url('new-photo.png.png') no-repeat center 15%;
-        background-size: cover;
-        border-radius: 16px;
+    /* Left Side Wrapper */
+    .left-section-box {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        padding: 35px;
-        color: white;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        gap: 15px;
     }
-    .banner-top-content {
+
+    /* Top Banner (Header portion from screenshot) */
+    .header-banner {
+        position: relative;
+        width: 100%;
+        min-height: 190px;
+        background: linear-gradient(rgba(0, 46, 110, 0.85), rgba(0, 186, 242, 0.85)), url('new-photo.png.png') no-repeat center 20%;
+        background-size: cover;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 30px;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .header-left-content {
         display: flex;
         align-items: center;
         gap: 20px;
     }
-    .profile-img {
-        width: 100px;
-        height: 100px;
+    .paytm-logo-circle {
+        width: 75px;
+        height: 75px;
+        background: #00baf2;
         border-radius: 50%;
-        object-fit: cover;
-        object-position: top center;
-        border: 4px solid #ffffff;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 900;
+        font-size: 18px;
+        color: white;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        border: 3px solid #fff;
     }
-    .banner-title h1 { font-size: 30px; font-weight: 800; margin-bottom: 6px; letter-spacing: 0.5px; }
-    .banner-title p { font-size: 15px; color: #e0f2fe; font-weight: 600; }
+    .header-titles h1 { font-size: 26px; font-weight: 800; margin-bottom: 4px; letter-spacing: 0.3px; }
+    .header-titles p { font-size: 14px; color: #e0f2fe; font-weight: 600; }
 
-    .banner-search {
-        width: 100%;
-        max-width: 480px;
-        background: rgba(255, 255, 255, 0.98);
-        padding: 20px;
+    /* Search Section Box */
+    .search-card-box {
+        background: #ffffff;
+        padding: 20px 25px;
         border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
     }
-    .banner-search h3 { font-size: 15px; color: #002e6e; margin-bottom: 10px; font-weight: 700; }
-    .search-box-flex { display: flex; gap: 8px; }
-    .search-box-flex input { flex: 1; padding: 11px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; outline: none; }
-    
-    /* Right Side: Full Size Pavan Image Card with Paytm Logo */
-    .right-showcase-card {
+    .search-card-box h3 { font-size: 15px; color: #002e6e; margin-bottom: 10px; font-weight: 700; }
+    .search-flex-row { display: flex; gap: 10px; }
+    .search-flex-row input { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
+
+    /* Right Side: Full Size Pavan Image Card matching screenshot */
+    .right-showcase-panel {
         background: white;
-        border-radius: 16px;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         border: 1px solid #e2e8f0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
-    .showcase-img-container {
+    .showcase-image-wrapper {
         width: 100%;
         height: 330px;
         background: #f8fafc;
         position: relative;
-        overflow: hidden;
     }
-    .showcase-img-container img {
+    .showcase-image-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         object-position: top center;
     }
-    .showcase-badge-box {
+    .showcase-footer-branding {
         padding: 20px;
-        background: white;
+        text-align: center;
+        background: #fff;
         border-top: 1px solid #f1f5f9;
     }
-    .paytm-brand-logo {
+    .brand-title-main {
         font-size: 28px;
         font-weight: 900;
         color: #002e6e;
         letter-spacing: -1px;
         margin-bottom: 4px;
     }
-    .paytm-brand-logo span { color: #00baf2; }
-    .showcase-badge-box p { font-size: 12px; color: #64748b; font-weight: 600; }
+    .brand-title-main span { color: #00baf2; }
+    .showcase-footer-branding p { font-size: 12px; color: #64748b; font-weight: 600; margin-bottom: 12px; }
+    
+    /* Icons row under the right side banner */
+    .feature-icons-row {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        padding-top: 5px;
+    }
+    .icon-item-box {
+        text-align: center;
+    }
+    .icon-item-box span {
+        display: block;
+        font-size: 10px;
+        color: #475569;
+        font-weight: 700;
+        margin-top: 2px;
+    }
 
     /* Tabs & Cards */
     .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -111,7 +138,7 @@
 
     .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
     
-    .btn { background: #00baf2; color: #fff; border: none; padding: 11px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
+    .btn { background: #00baf2; color: #fff; border: none; padding: 12px 22px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 14px; }
     .btn:hover { background: #0099c8; }
     .btn-dark { background: #002e6e; color: white; }
     .btn-danger { background: #ef4444; color: white; }
@@ -148,8 +175,7 @@
     .modal-content { background: white; padding: 20px; border-radius: 10px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
 
     @media (max-width: 900px) {
-      .portal-grid { grid-template-columns: 1fr; }
-      .right-showcase-card { max-width: 100%; }
+      .top-design-container { grid-template-columns: 1fr; }
     }
   </style>
 
@@ -160,29 +186,354 @@
 
 <div class="main-container">
   
-  <div class="portal-grid">
+  <!-- Exact Screenshot Layout Container -->
+  <div class="top-design-container">
     
-    <div class="hero-banner">
-      <div class="banner-top-content">
-        <img src="new-photo.png.png" alt="Pavan" class="profile-img">
-        <div class="banner-title">
-          <h1>Paytm Employee Verification Portal</h1>
-          <p>Authorized Brand Promoter Portal</p>
+    <!-- Left Section: Header Banner + Quick Search Box -->
+    <div class="left-section-box">
+      
+      <!-- Top Header Banner -->
+      <div class="header-banner">
+        <div class="header-left-content">
+          <div class="paytm-logo-circle">Paytm</div>
+          <div class="header-titles">
+            <h1>Paytm Employee Verification Portal</h1>
+            <p>Authorized Brand Promoter Portal</p>
+          </div>
         </div>
       </div>
 
-      <div class="banner-search">
+      <!-- Quick Search Box -->
+      <div class="search-card-box">
         <h3>Quick Employee Search</h3>
-        <div class="search-box-flex">
+        <div class="search-flex-row">
           <input type="text" id="searchInput" placeholder="Enter ID (e.g., 66646)">
           <button class="btn" onclick="searchUser()">Search</button>
         </div>
         <p id="errorText" class="error-msg">No employee found with this ID!</p>
       </div>
+
     </div>
 
-    <div class="right-showcase-card">
-      <div class="showcase-img-container">
+    <!-- Right Section: Full Size Pavan Image Card matching screenshot -->
+    <div class="right-showcase-panel">
+      <div class="showcase-image-wrapper">
         <img src="new-photo.png.png" alt="Pavan Showcase">
       </div>
-      <div class="show
+      <div class="showcase-footer-branding">
+        <div class="brand-title-main">Pay<span>tm</span></div>
+        <p>India's Most Trusted Payments Platform</p>
+        
+        <!-- Icons as shown in your exact screenshot -->
+        <div class="feature-icons-row">
+          <div class="icon-item-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <span>Mobile Recharge</span>
+          </div>
+          <div class="icon-item-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/></svg>
+            <span>Electricity Bill</span>
+          </div>
+          <div class="icon-item-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>DTH Recharge</span>
+          </div>
+          <div class="icon-item-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00baf2" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Money Transfer</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
+    <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
+  </div>
+
+  <!-- SEARCH RESULT SECTION -->
+  <div id="searchTab">
+    <div class="card hidden" id="resultCard">
+      <div class="profile-card-header">
+        <img id="resPhoto" class="profile-photo" src="" alt="Employee Photo" onerror="this.src='https://via.placeholder.com/150'">
+        <div class="profile-info">
+          <h2 id="resName" style="font-size: 22px;">-</h2>
+          <p id="resRole" style="color: #64748b; font-size: 14px;">-</p>
+          <span class="status-badge" id="resStatus">-</span>
+        </div>
+      </div>
+
+      <div class="details-grid">
+        <div class="detail-item"><label>Employee ID</label><span id="resId">-</span></div>
+        <div class="detail-item"><label>Department</label><span id="resDept">-</span></div>
+        <div class="detail-item"><label>Location</label><span id="resLocation">-</span></div>
+        <div class="detail-item"><label>Date of Joining</label><span id="resDoj">-</span></div>
+        <div class="detail-item"><label>Mobile No.</label><span id="resPhone">-</span></div>
+        <div class="detail-item"><label>Blood Group</label><span id="resBlood">-</span></div>
+        <div class="detail-item" style="grid-column: span 2;"><label>Emergency Contact</label><span id="resEmergency">-</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN SECTION -->
+  <div id="adminTab" class="hidden">
+    <div class="card">
+      <h3 style="margin-bottom: 5px;">Team Members Management</h3>
+      <p style="font-size: 12px; color: #15803d; margin-bottom: 15px;">🟢 Live Firebase Cloud Database Connected</p>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom: 15px;">Register / Add New Employee</h3>
+      <form id="addMemberForm" onsubmit="addNewMember(event)">
+        <div class="form-group"><label>Employee ID</label><input type="text" id="newId" required></div>
+        <div class="form-group">
+          <label>Upload Photo File (or Link)</label>
+          <input type="file" accept="image/*" onchange="convertImageToBase64(this, 'new')">
+          <input type="text" id="newPhotoUrl" placeholder="or Paste Image Link" style="margin-top: 5px;">
+        </div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="newName" required></div>
+        <div class="form-group"><label>Designation</label><input type="text" id="newRole" required></div>
+        <div class="form-group"><label>Department</label><input type="text" id="newDept" required></div>
+        <div class="form-group">
+          <label>Present Status</label>
+          <select id="newStatus"><option value="Active">Active</option><option value="Inactive">Inactive</option></select>
+        </div>
+        <div class="form-group"><label>Location</label><input type="text" id="newLocation" required></div>
+        <div class="form-group"><label>Date of Joining</label><input type="text" id="newDoj" required></div>
+        <div class="form-group"><label>Mobile No.</label><input type="text" id="newPhone" required></div>
+        <div class="form-group"><label>Blood Group</label><input type="text" id="newBlood" required></div>
+        <div class="form-group"><label>Emergency Contact</label><input type="text" id="newEmergency" required></div>
+        <button type="submit" class="btn btn-dark" style="width: 100%; margin-top: 10px;">Save to Cloud Database</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- EDIT MODAL -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <h3>Edit Employee Details</h3>
+    <form onsubmit="saveEditedMember(event)">
+      <input type="hidden" id="editIndex">
+      <div class="form-group"><label>Employee ID</label><input type="text" id="editId" readonly style="background:#e2e8f0;"></div>
+      <div class="form-group">
+        <label>Update Photo</label>
+        <input type="file" accept="image/*" onchange="convertImageToBase64(this, 'edit')">
+        <input type="text" id="editPhotoUrl" style="margin-top:5px;">
+      </div>
+      <div class="form-group"><label>Name</label><input type="text" id="editName" required></div>
+      <div class="form-group"><label>Role</label><input type="text" id="editRole" required></div>
+      <div class="form-group"><label>Department</label><input type="text" id="editDept" required></div>
+      <div class="form-group"><label>Location</label><input type="text" id="editLocation" required></div>
+      <div class="form-group"><label>Date of Joining</label><input type="text" id="editDoj" required></div>
+      <div class="form-group"><label>Mobile</label><input type="text" id="editPhone" required></div>
+      <div class="form-group"><label>Blood Group</label><input type="text" id="editBlood" required></div>
+      <div class="form-group"><label>Emergency Contact</label><input type="text" id="editEmergency" required></div>
+      <div style="display:flex; gap:10px; margin-top:15px;">
+        <button type="submit" class="btn btn-dark" style="flex:1;">Update Cloud</button>
+        <button type="button" class="btn" style="background:#64748b;" onclick="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyAWn4Fl8gq25WE_NyY4AZhN6vgrd6lituk",
+    authDomain: "paytm-portal-new.firebaseapp.com",
+    databaseURL: "https://paytm-portal-new-default-rtdb.firebaseio.com",
+    projectId: "paytm-portal-new",
+    storageBucket: "paytm-portal-new.appspot.com",
+    messagingSenderId: "680376845054",
+    appId: "1:680376845054:web:dcdac0adb97f68c65d9baf",
+    measurementId: "G-39ELFEFG7S"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+  const dbRef = database.ref('employees');
+
+  const ADMIN_PIN = "pavan9842";
+  let teamDatabase = [];
+  let uploadedImageBase64New = "";
+  let uploadedImageBase64Edit = "";
+
+  dbRef.on('value', (snapshot) => {
+    const data = snapshot.val();
+    teamDatabase = data ? Object.values(data) : [];
+    renderAdminTable();
+  });
+
+  async function verifyPin(inputPin) { return inputPin === ADMIN_PIN; }
+
+  function switchTab(tab) {
+    document.getElementById('searchTab').classList.toggle('hidden', tab !== 'search');
+    document.getElementById('adminTab').classList.toggle('hidden', tab !== 'admin');
+    document.querySelectorAll('.tab-btn')[0].classList.toggle('active', tab === 'search');
+    document.querySelectorAll('.tab-btn')[1].classList.toggle('active', tab === 'admin');
+  }
+
+  function searchUser() {
+    const inputId = document.getElementById('searchInput').value.trim().toUpperCase();
+    const user = teamDatabase.find(item => item.id.toUpperCase() === inputId);
+    if (user) {
+      document.getElementById('errorText').style.display = 'none';
+      document.getElementById('resultCard').classList.remove('hidden');
+      document.getElementById('resPhoto').src = user.photoUrl || 'https://via.placeholder.com/150';
+      document.getElementById('resName').innerText = user.name;
+      document.getElementById('resRole').innerText = user.role;
+      document.getElementById('resId').innerText = user.id;
+      document.getElementById('resDept').innerText = user.department;
+      document.getElementById('resLocation').innerText = user.location;
+      document.getElementById('resDoj').innerText = user.doj;
+      document.getElementById('resPhone').innerText = user.phone;
+      document.getElementById('resBlood').innerText = user.bloodGroup;
+      document.getElementById('resEmergency').innerText = user.emergencyContact;
+      document.getElementById('resStatus').innerText = user.status;
+      document.getElementById('resStatus').className = `status-badge ${user.status === 'Active' ? 'active' : 'inactive'}`;
+    } else {
+      document.getElementById('resultCard').classList.add('hidden');
+      document.getElementById('errorText').style.display = 'block';
+    }
+  }
+
+  function convertImageToBase64(element, type) {
+    const file = element.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (type === 'new') uploadedImageBase64New = reader.result;
+      if (type === 'edit') uploadedImageBase64Edit = reader.result;
+    }
+    reader.readAsDataURL(file);
+  }
+
+  function renderAdminTable() {
+    const tbody = document.getElementById('adminTableBody');
+    tbody.innerHTML = '';
+    teamDatabase.forEach((user, index) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><img src="${user.photoUrl || 'https://via.placeholder.com/150'}" class="table-photo"></td>
+        <td>${user.id}</td>
+        <td>${user.name}</td>
+        <td><strong style="color: ${user.status === 'Active' ? '#15803d' : '#b91c1c'};">${user.status}</strong></td>
+        <td>
+          <button class="toggle-btn ${user.status === 'Active' ? 'btn-inactive-state' : 'btn-active-state'}" onclick="toggleStatus('${user.id}')">
+            ${user.status === 'Active' ? 'Deactivate' : 'Activate'}
+          </button>
+          <button class="toggle-btn btn-edit" onclick="openEditModal(${index})">Edit</button>
+          <button class="toggle-btn btn-danger" onclick="deleteMember('${user.id}')">Delete</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  async function toggleStatus(empId) {
+    const pin = prompt("Enter PIN:");
+    if (await verifyPin(pin)) {
+      const user = teamDatabase.find(u => u.id === empId);
+      const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
+      database.ref('employees/' + empId).update({ status: newStatus });
+    } else alert("Incorrect PIN!");
+  }
+
+  async function deleteMember(empId) {
+    const pin = prompt("Enter PIN to delete this record:");
+    if (await verifyPin(pin)) {
+      if (confirm(`Are you sure you want to delete employee ID: ${empId}?`)) {
+        database.ref('employees/' + empId).remove();
+      }
+    } else alert("Incorrect PIN!");
+  }
+
+  function openEditModal(index) {
+    const u = teamDatabase[index];
+    document.getElementById('editIndex').value = index;
+    document.getElementById('editId').value = u.id;
+    document.getElementById('editPhotoUrl').value = (u.photoUrl && u.photoUrl.startsWith('data:image')) ? '' : (u.photoUrl || '');
+    document.getElementById('editName').value = u.name;
+    document.getElementById('editRole').value = u.role;
+    document.getElementById('editDept').value = u.department;
+    document.getElementById('editLocation').value = u.location;
+    document.getElementById('editDoj').value = u.doj;
+    document.getElementById('editPhone').value = u.phone;
+    document.getElementById('editBlood').value = u.bloodGroup;
+    document.getElementById('editEmergency').value = u.emergencyContact;
+    document.getElementById('editModal').style.display = 'flex';
+  }
+
+  function closeModal() { document.getElementById('editModal').style.display = 'none'; }
+
+  async function saveEditedMember(event) {
+    event.preventDefault();
+    if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
+    
+    const empId = document.getElementById('editId').value;
+    const index = document.getElementById('editIndex').value;
+    let photo = uploadedImageBase64Edit || document.getElementById('editPhotoUrl').value.trim() || teamDatabase[index].photoUrl;
+
+    database.ref('employees/' + empId).update({
+      name: document.getElementById('editName').value,
+      role: document.getElementById('editRole').value,
+      department: document.getElementById('editDept').value,
+      location: document.getElementById('editLocation').value,
+      doj: document.getElementById('editDoj').value,
+      phone: document.getElementById('editPhone').value,
+      bloodGroup: document.getElementById('editBlood').value,
+      emergencyContact: document.getElementById('editEmergency').value,
+      photoUrl: photo
+    });
+    closeModal();
+  }
+
+  async function addNewMember(event) {
+    event.preventDefault();
+    if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
+
+    const id = document.getElementById('newId').value.trim().toUpperCase();
+    let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'https://via.placeholder.com/150';
+
+    const newMember = {
+      id: id,
+      photoUrl: photo,
+      name: document.getElementById('newName').value,
+      role: document.getElementById('newRole').value,
+      department: document.getElementById('newDept').value,
+      status: document.getElementById('newStatus').value,
+      location: document.getElementById('newLocation').value,
+      doj: document.getElementById('newDoj').value,
+      phone: document.getElementById('newPhone').value,
+      bloodGroup: document.getElementById('newBlood').value,
+      emergencyContact: document.getElementById('newEmergency').value
+    };
+
+    database.ref('employees/' + id).set(newMember);
+    document.getElementById('addMemberForm').reset();
+    uploadedImageBase64New = "";
+    switchTab('search');
+    alert("Employee saved successfully to Cloud Database!");
+  }
+</script>
+
+</body>
+</html>
