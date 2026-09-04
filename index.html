@@ -9,30 +9,25 @@
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
     .main-container { max-width: 1100px; margin: 0 auto; }
     
-    /* Layout Grid for Desktop */
     .top-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; align-items: start; }
     @media (max-width: 768px) { .top-layout { grid-template-columns: 1fr; } }
 
-    /* Hero Banner Card */
     .hero-card { background: linear-gradient(135deg, #002e6e 0%, #00baf2 100%); color: white; padding: 35px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: left; }
     .hero-card h1 { font-size: 26px; margin-bottom: 8px; font-weight: 700; }
-    .hero-card p { font-size: 14px; opacity: 0.9; min-height: 20px; font-weight: 400; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 20px; font-size: 12px; margin-top: 15px; font-weight: 600; }
+    .hero-card p { font-size: 14px; opacity: 0.95; min-height: 24px; font-weight: 500; }
+    .hero-badge { display: inline-block; background: rgba(255,255,255,0.25); padding: 6px 14px; border-radius: 20px; font-size: 12px; margin-top: 15px; font-weight: 600; }
 
-    /* Side Banner Image Card */
     .promo-card { background: #ffffff; padding: 15px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
-    .promo-card img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; }
-    .promo-card h4 { margin-top: 10px; font-size: 16px; color: #002e6e; }
-    .promo-card p { font-size: 12px; color: #64748b; }
+    .promo-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; border: 2px solid #00baf2; }
+    .promo-card h4 { margin-top: 12px; font-size: 16px; color: #002e6e; font-weight: 700; }
+    .promo-card p { font-size: 12px; color: #64748b; font-weight: 500; }
 
-    /* Nav Tabs */
     .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 12px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 8px; cursor: pointer; color: #334155; transition: 0.2s; }
     .tab-btn.active { background: #002e6e; color: #fff; }
 
     .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
     
-    /* Search Bar */
     .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
     .search-box input, .form-group input, .form-group select { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
     .btn { background: #00baf2; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
@@ -40,7 +35,6 @@
     .btn-dark { background: #002e6e; color: white; }
     .btn-danger { background: #ef4444; color: white; }
 
-    /* Profile Card Inside Search */
     .profile-card-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
     .profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
     
@@ -70,7 +64,7 @@
     .modal-content { background: white; padding: 20px; border-radius: 10px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
   </style>
 
-  <!-- Firebase Live Database SDKs (v8.10.1) -->
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
@@ -78,7 +72,6 @@
 
 <div class="main-container">
   
-  <!-- TOP LAYOUT: Hero Banner + Brand Ambassador Photo Card -->
   <div class="top-layout">
     <div class="hero-card">
       <h1>Paytm Employee Verification Portal</h1>
@@ -86,7 +79,7 @@
       <div class="hero-badge">Authorized Brand Promoter Portal</div>
     </div>
     <div class="promo-card">
-      <img src="new-photo.png" alt="Pavan - Brand Promoter" onerror="this.src='https://via.placeholder.com/150'">
+      <img src="https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png" alt="Pavan - Brand Promoter" onerror="this.src='new-photo.png'">
       <h4>Pavan Kumar</h4>
       <p>Paytm Brand Ambassador & Team Lead</p>
     </div>
@@ -110,7 +103,7 @@
 
     <div class="card hidden" id="resultCard">
       <div class="profile-card-header">
-        <img id="resPhoto" class="profile-photo" src="" alt="Employee Photo" onerror="this.src='https://via.placeholder.com/150'">
+        <img id="resPhoto" class="profile-photo" src="" alt="Employee Photo">
         <div class="profile-info">
           <h2 id="resName" style="font-size: 22px; color: #002e6e;">-</h2>
           <p id="resRole" style="color: #64748b; font-size: 14px; font-weight: 500;">-</p>
@@ -134,7 +127,7 @@
   <div id="adminTab" class="hidden">
     <div class="card">
       <h3 style="margin-bottom: 5px;">Team Members Management</h3>
-      <p style="font-size: 12px; color: #15803d; margin-bottom: 15px;">🟢 Live Firebase Cloud Database Connected (paytm-portal-new)</p>
+      <p style="font-size: 12px; color: #15803d; margin-bottom: 15px;">🟢 Live Firebase Cloud Database Connected</p>
       <div style="overflow-x:auto;">
         <table>
           <thead>
@@ -156,9 +149,8 @@
       <form id="addMemberForm" onsubmit="addNewMember(event)">
         <div class="form-group"><label>Employee ID</label><input type="text" id="newId" required></div>
         <div class="form-group">
-          <label>Upload Photo File or Link</label>
-          <input type="file" accept="image/*" onchange="convertImageToBase64(this, 'new')">
-          <input type="text" id="newPhotoUrl" placeholder="or Paste Image Link" style="margin-top: 5px;" value="new-photo.png">
+          <label>Photo URL / Link</label>
+          <input type="text" id="newPhotoUrl" placeholder="Image Link" value="https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png">
         </div>
         <div class="form-group"><label>Full Name</label><input type="text" id="newName" required></div>
         <div class="form-group"><label>Designation</label><input type="text" id="newRole" required></div>
@@ -186,11 +178,7 @@
     <form onsubmit="saveEditedMember(event)">
       <input type="hidden" id="editIndex">
       <div class="form-group"><label>Employee ID</label><input type="text" id="editId" readonly style="background:#e2e8f0;"></div>
-      <div class="form-group">
-        <label>Update Photo</label>
-        <input type="file" accept="image/*" onchange="convertImageToBase64(this, 'edit')">
-        <input type="text" id="editPhotoUrl" style="margin-top:5px;">
-      </div>
+      <div class="form-group"><label>Photo URL</label><input type="text" id="editPhotoUrl"></div>
       <div class="form-group"><label>Name</label><input type="text" id="editName" required></div>
       <div class="form-group"><label>Role</label><input type="text" id="editRole" required></div>
       <div class="form-group"><label>Department</label><input type="text" id="editDept" required></div>
@@ -210,10 +198,7 @@
 <script>
   // Typewriter Animation Effect
   const texts = ["Search official job status and team verification details using Employee ID", "Official Paytm Team Verification Portal"];
-  let count = 0;
-  let index = 0;
-  let currentText = "";
-  let letter = "";
+  let count = 0, index = 0, currentText = "", letter = "";
 
   (function type() {
     if (count === texts.length) count = 0;
@@ -222,15 +207,13 @@
     const target = document.getElementById("typewriterText");
     if (target) target.textContent = letter;
     if (letter.length === currentText.length) {
-      count++;
-      index = 0;
+      count++; index = 0;
       setTimeout(type, 2000);
     } else {
       setTimeout(type, 80);
     }
   })();
 
-  // Firebase Configuration (paytm-portal-new)
   const firebaseConfig = {
     apiKey: "AIzaSyAWn4Fl8gq25WE_NyY4AZhN6vgrd6lituk",
     authDomain: "paytm-portal-new.firebaseapp.com",
@@ -245,11 +228,8 @@
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
   const dbRef = database.ref('employees');
-
   const ADMIN_PIN = "pavan9842";
   let teamDatabase = [];
-  let uploadedImageBase64New = "";
-  let uploadedImageBase64Edit = "";
 
   dbRef.on('value', (snapshot) => {
     const data = snapshot.val();
@@ -272,7 +252,7 @@
     if (user) {
       document.getElementById('errorText').style.display = 'none';
       document.getElementById('resultCard').classList.remove('hidden');
-      document.getElementById('resPhoto').src = user.photoUrl || 'new-photo.png';
+      document.getElementById('resPhoto').src = user.photoUrl || 'https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png';
       document.getElementById('resName').innerText = user.name;
       document.getElementById('resRole').innerText = user.role;
       document.getElementById('resId').innerText = user.id;
@@ -290,24 +270,13 @@
     }
   }
 
-  function convertImageToBase64(element, type) {
-    const file = element.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      if (type === 'new') uploadedImageBase64New = reader.result;
-      if (type === 'edit') uploadedImageBase64Edit = reader.result;
-    }
-    reader.readAsDataURL(file);
-  }
-
   function renderAdminTable() {
     const tbody = document.getElementById('adminTableBody');
     tbody.innerHTML = '';
     teamDatabase.forEach((user, index) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><img src="${user.photoUrl || 'new-photo.png'}" class="table-photo"></td>
+        <td><img src="${user.photoUrl || 'https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png'}" class="table-photo"></td>
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td><strong style="color: ${user.status === 'Active' ? '#15803d' : '#b91c1c'};">${user.status}</strong></td>
@@ -345,7 +314,7 @@
     const u = teamDatabase[index];
     document.getElementById('editIndex').value = index;
     document.getElementById('editId').value = u.id;
-    document.getElementById('editPhotoUrl').value = (u.photoUrl && u.photoUrl.startsWith('data:image')) ? '' : (u.photoUrl || '');
+    document.getElementById('editPhotoUrl').value = u.photoUrl || '';
     document.getElementById('editName').value = u.name;
     document.getElementById('editRole').value = u.role;
     document.getElementById('editDept').value = u.department;
@@ -363,8 +332,7 @@
     event.preventDefault();
     if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
     const empId = document.getElementById('editId').value;
-    const index = document.getElementById('editIndex').value;
-    let photo = uploadedImageBase64Edit || document.getElementById('editPhotoUrl').value.trim() || teamDatabase[index].photoUrl;
+    let photo = document.getElementById('editPhotoUrl').value.trim();
 
     database.ref('employees/' + empId).update({
       name: document.getElementById('editName').value,
@@ -384,7 +352,7 @@
     event.preventDefault();
     if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
     const id = document.getElementById('newId').value.trim().toUpperCase();
-    let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'new-photo.png';
+    let photo = document.getElementById('newPhotoUrl').value.trim();
 
     const newMember = {
       id: id,
@@ -402,7 +370,6 @@
 
     database.ref('employees/' + id).set(newMember);
     document.getElementById('addMemberForm').reset();
-    uploadedImageBase64New = "";
     switchTab('search');
     alert("Employee saved successfully to Cloud Database!");
   }
