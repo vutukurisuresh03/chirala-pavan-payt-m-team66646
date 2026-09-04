@@ -24,13 +24,12 @@
         gap: 20px;
     }
 
-    /* Top Banner with Face Perfectly Positioned */
+    /* Top Banner with Animated Paytm Branding */
     .top-blue-banner {
         position: relative;
         width: 100%;
         min-height: 250px;
-        background: linear-gradient(135deg, rgba(0, 46, 110, 0.88), rgba(0, 186, 242, 0.82)), url('new-photo.png.png') no-repeat center 8%;
-        background-size: cover;
+        background: linear-gradient(135deg, #002e6e, #00baf2);
         border-radius: 16px;
         display: flex;
         align-items: center;
@@ -41,13 +40,24 @@
         overflow: hidden;
     }
 
-    /* Soft overlay to make text and face clear */
-    .top-blue-banner::before {
-        content: '';
+    /* Background Animated Paytm Watermark / Elements */
+    .animated-bg-text {
         position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at 75% 25%, rgba(0, 186, 242, 0.3) 0%, rgba(0, 46, 110, 0.7) 85%);
-        z-index: 1;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 85px;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.08);
+        letter-spacing: -2px;
+        pointer-events: none;
+        white-space: nowrap;
+        animation: pulsePaytm 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulsePaytm {
+        0% { opacity: 0.05; transform: translateY(-50%) scale(0.95); }
+        100% { opacity: 0.2; transform: translateY(-50%) scale(1.05); }
     }
 
     .banner-inner-content {
@@ -73,8 +83,14 @@
         box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         flex-shrink: 0;
         border: 3px solid #00baf2;
+        animation: bounceLogo 2s ease-in-out infinite;
     }
     .paytm-logo-badge span { color: #00baf2; }
+
+    @keyframes bounceLogo {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+    }
 
     .banner-text-group h1 { font-size: 28px; font-weight: 800; margin-bottom: 5px; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
     .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
@@ -200,8 +216,9 @@
     <!-- Left Side Container -->
     <div class="left-content-area">
       
-      <!-- Top Banner with Logo, Title and Face Position Fixed -->
+      <!-- Top Banner with Animated Paytm Branding -->
       <div class="top-blue-banner">
+        <div class="animated-bg-text">Paytm Trust</div>
         <div class="banner-inner-content">
           <div class="paytm-logo-badge">Pay<span>tm</span></div>
           <div class="banner-text-group">
@@ -477,7 +494,7 @@
   function openEditModal(index) {
     const u = teamDatabase[index];
     document.getElementById('editIndex').value = index;
-    document.getElementById('editId').value = u.id;
+    id = document.getElementById('editId').value = u.id;
     document.getElementById('editPhotoUrl').value = (u.photoUrl && u.photoUrl.startsWith('data:image')) ? '' : (u.photoUrl || '');
     document.getElementById('editName').value = u.name;
     document.getElementById('editRole').value = u.role;
@@ -490,7 +507,7 @@
     document.getElementById('editModal').style.display = 'flex';
   }
 
-  function closeModal() { document.getElementById('editModal').style.display = 'none'; }
+  function closeModal() { document.getElementById('editModal'].style.display = 'none'; }
 
   async function saveEditedMember(event) {
     event.preventDefault();
