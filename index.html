@@ -9,32 +9,38 @@
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
     .main-container { max-width: 1100px; margin: 0 auto; }
     
+    /* Layout mirroring screenshot exactly */
     .top-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; margin-bottom: 20px; align-items: start; }
     @media (max-width: 768px) { .top-layout { grid-template-columns: 1fr; } }
 
-    .hero-card { background: linear-gradient(135deg, #002e6e 0%, #00baf2 100%); color: white; padding: 35px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: left; position: relative; }
+    .hero-card { background: linear-gradient(135deg, #002e6e 0%, #00baf2 100%); color: white; padding: 35px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: left; position: relative; min-height: 200px; display: flex; flex-direction: column; justify-content: center; }
     .hero-header-flex { display: flex; align-items: center; gap: 15px; margin-bottom: 8px; }
     .paytm-logo-icon { width: 45px; height: 45px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #00baf2; font-size: 16px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
     .hero-card h1 { font-size: 26px; font-weight: 700; color: white; }
     .hero-card p { font-size: 14px; opacity: 0.95; min-height: 24px; font-weight: 500; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.25); padding: 6px 14px; border-radius: 20px; font-size: 12px; margin-top: 15px; font-weight: 600; }
+    .hero-badge { display: inline-block; background: rgba(255,255,255,0.25); padding: 6px 14px; border-radius: 20px; font-size: 12px; margin-top: 15px; font-weight: 600; width: fit-content; }
 
-    /* Only Photo Card - No Text Below */
+    /* Right Side Photo Card as seen in screenshot */
     .promo-card { background: #ffffff; padding: 15px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
-    .promo-card img { width: 100%; height: 250px; object-fit: cover; border-radius: 12px; border: 2px solid #00baf2; display: block; }
+    .promo-card img { width: 100%; height: 260px; object-fit: cover; border-radius: 12px; border: 2px solid #00baf2; display: block; margin-bottom: 12px; }
+    .promo-brand-text { font-size: 14px; font-weight: bold; color: #002e6e; margin-bottom: 4px; }
+    .promo-sub-text { font-size: 11px; color: #64748b; margin-bottom: 10px; }
+    .promo-icons { display: flex; justify-content: space-around; font-size: 10px; color: #475569; border-top: 1px solid #f1f5f9; padding-top: 8px; }
+    .promo-icons div { text-align: center; }
 
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-    .tab-btn { flex: 1; padding: 12px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 8px; cursor: pointer; color: #334155; transition: 0.2s; }
-    .tab-btn.active { background: #002e6e; color: #fff; }
-
+    /* Search Box Section */
     .card { background: #ffffff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 20px; }
-    
-    .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
+    .search-box { display: flex; gap: 10px; margin-top: 10px; }
     .search-box input, .form-group input, .form-group select { flex: 1; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; outline: none; }
     .btn { background: #00baf2; color: #fff; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; }
     .btn:hover { background: #0099c8; }
     .btn-dark { background: #002e6e; color: white; }
     .btn-danger { background: #ef4444; color: white; }
+
+    /* Exact Tabs as shown in screenshot */
+    .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+    .tab-btn { padding: 14px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 8px; cursor: pointer; color: #334155; transition: 0.2s; text-align: center; font-size: 14px; }
+    .tab-btn.active { background: #002e6e; color: #fff; }
 
     .profile-card-header { display: flex; align-items: center; gap: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 20px; margin-bottom: 20px; }
     .profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #00baf2; }
@@ -47,7 +53,7 @@
     .detail-item label { display: block; font-size: 11px; color: #64748b; text-transform: uppercase; margin-bottom: 2px; }
     .detail-item span { font-size: 15px; font-weight: 600; }
     
-    .error-msg { color: #dc2626; text-align: center; font-weight: bold; display: none; }
+    .error-msg { color: #dc2626; margin-top: 10px; font-weight: bold; display: none; }
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; }
     .hidden { display: none; }
@@ -73,7 +79,7 @@
 
 <div class="main-container">
   
-  <!-- TOP LAYOUT: Hero Banner with Paytm Logo + Pure Photo Card -->
+  <!-- TOP LAYOUT: Hero Banner with Paytm Logo + Right Side Photo Card -->
   <div class="top-layout">
     <div class="hero-card">
       <div class="hero-header-flex">
@@ -83,22 +89,38 @@
       <p id="typewriterText"></p>
       <div class="hero-badge">Authorized Brand Promoter Portal</div>
     </div>
+    
     <div class="promo-card">
       <img src="https://raw.githubusercontent.com/vutukurisuresh03/chirala-pavan-payt-m-team66646/main/new-photo.png" alt="Pavan Photo" onerror="this.src='new-photo.png'">
+      <div class="promo-brand-text">Paytm</div>
+      <div class="promo-sub-text">India's Most Trusted Payments Platform</div>
+      <div class="promo-icons">
+        <div>📱<br>Mobile</div>
+        <div>⚡<br>Electricity</div>
+        <div>🛍️<br>DTH</div>
+        <div>💸<br>Transfer</div>
+      </div>
     </div>
   </div>
 
-  <!-- SEARCH SECTION MOVED TO TOP -->
-  <div id="searchTab">
-    <div class="card">
-      <h3 style="margin-bottom: 10px; font-size: 16px; color: #334155;">Quick Employee Search</h3>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Enter Employee ID (e.g., 20084278, 66646)">
-        <button class="btn" onclick="searchUser()">Search</button>
-      </div>
-      <p id="errorText" class="error-msg">No employee found with this ID!</p>
+  <!-- QUICK EMPLOYEE SEARCH BOX -->
+  <div class="card">
+    <h3 style="font-size: 16px; color: #334155;">Quick Employee Search</h3>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Enter ID (e.g., 66646)">
+      <button class="btn" onclick="searchUser()">Search</button>
     </div>
+    <p id="errorText" class="error-msg">No employee found with this ID!</p>
+  </div>
 
+  <!-- EXACT TABS MAPPING SCREENSHOT -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
+    <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
+  </div>
+
+  <!-- SEARCH RESULT VIEW TAB CONTENT -->
+  <div id="searchTab">
     <div class="card hidden" id="resultCard">
       <div class="profile-card-header">
         <img id="resPhoto" class="profile-photo" src="" alt="Employee Photo">
@@ -121,13 +143,7 @@
     </div>
   </div>
 
-  <!-- TABS MOVED BELOW SEARCH -->
-  <div class="tabs" style="margin-top: 20px;">
-    <button class="tab-btn active" onclick="switchTab('search')">Search Panel View</button>
-    <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
-  </div>
-
-  <!-- ADMIN SECTION -->
+  <!-- ADMIN MANAGEMENT TAB CONTENT -->
   <div id="adminTab" class="hidden">
     <div class="card">
       <h3 style="margin-bottom: 5px;">Team Members Management</h3>
