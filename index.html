@@ -9,7 +9,6 @@
     body { background-color: #f1f5f9; color: #1e293b; padding: 20px; }
     .main-container { max-width: 1300px; margin: 0 auto; }
     
-    /* Layout Wrapper */
     .portal-main-layout {
         display: grid;
         grid-template-columns: 1fr 380px;
@@ -24,7 +23,6 @@
         gap: 20px;
     }
 
-    /* Top Banner with Wave Animated Paytm Branding */
     .top-blue-banner {
         position: relative;
         width: 100%;
@@ -93,7 +91,6 @@
 
     .banner-text-group p { font-size: 15px; color: #e0f2fe; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.3); margin-top: 8px; }
 
-    /* Wave Animation Styles for Header */
     .wave-text {
         display: inline-flex;
         font-size: 26px;
@@ -111,7 +108,6 @@
         animation: waveAnim 0.4s ease forwards;
     }
 
-    /* ప్రతీ అక్షరానికి వేవ్‌లా వచ్చేలా టైమింగ్స్ */
     .wave-text span:nth-child(1)  { animation-delay: 0.03s; }
     .wave-text span:nth-child(2)  { animation-delay: 0.06s; }
     .wave-text span:nth-child(3)  { animation-delay: 0.09s; }
@@ -146,26 +142,13 @@
     .wave-text span:nth-child(32) { animation-delay: 0.96s; }
 
     @keyframes waveAnim {
-        0% {
-            opacity: 0;
-            transform: translateY(20px) scale(0.6);
-        }
-        70% {
-            opacity: 1;
-            transform: translateY(-5px) scale(1.05);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        0% { opacity: 0; transform: translateY(20px) scale(0.6); }
+        70% { opacity: 1; transform: translateY(-5px) scale(1.05); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .space {
-        display: inline-block;
-        width: 8px;
-    }
+    .space { display: inline-block; width: 8px; }
 
-    /* Quick Search Box */
     .search-card-box {
         background: #ffffff;
         padding: 22px 25px;
@@ -178,7 +161,6 @@
     .search-flex-row input { flex: 1; padding: 14px 16px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; }
     .search-flex-row input:focus { border-color: #00baf2; box-shadow: 0 0 0 3px rgba(0,186,242,0.15); }
 
-    /* Right Side: Full Size Pavan Image Panel */
     .right-showcase-panel {
         background: white;
         border-radius: 16px;
@@ -225,7 +207,6 @@
     .icon-item-box { text-align: center; }
     .icon-item-box span { display: block; font-size: 10px; color: #475569; font-weight: 700; margin-top: 4px; }
 
-    /* Tabs & Cards */
     .tabs { display: flex; gap: 12px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 14px; border: none; background: #e2e8f0; font-weight: bold; border-radius: 10px; cursor: pointer; color: #334155; font-size: 15px; transition: all 0.2s; }
     .tab-btn.active { background: #002e6e; color: #fff; box-shadow: 0 4px 12px rgba(0,46,110,0.2); }
@@ -280,19 +261,15 @@
 
 <div class="main-container">
   
-  <!-- Main Grid Layout -->
   <div class="portal-main-layout">
     
-    <!-- Left Side Container -->
     <div class="left-content-area">
       
-      <!-- Top Banner with Animated Paytm Branding & Wave Text -->
       <div class="top-blue-banner">
         <div class="animated-bg-text">Paytm Trust</div>
         <div class="banner-inner-content">
           <div class="paytm-logo-badge">Pay<span>tm</span></div>
           <div class="banner-text-group">
-            <!-- వేవ్ యానిమేషన్ హెడ్డింగ్ -->
             <h1 class="wave-text">
               <span>P</span><span>a</span><span>y</span><span>t</span><span>m</span><span class="space"></span>
               <span>E</span><span>m</span><span>p</span><span>l</span><span>o</span><span>y</span><span>e</span><span>e</span><span class="space"></span>
@@ -304,7 +281,6 @@
         </div>
       </div>
 
-      <!-- Quick Search Box -->
       <div class="search-card-box">
         <h3>Quick Employee Search</h3>
         <div class="search-flex-row">
@@ -314,15 +290,13 @@
         <p id="errorText" class="error-msg">No employee found with this ID!</p>
       </div>
 
-      <!-- Tabs Navigation -->
       <div class="tabs" style="margin-bottom: 0;">
         <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
-        <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
+        <button class="tab-btn" onclick="switchToAdminTab()">Team Status & Management</button>
       </div>
 
     </div>
 
-    <!-- Right Side: Full Size Pavan Image Showcase Panel -->
     <div class="right-showcase-panel">
       <div class="showcase-image-wrapper">
         <img src="new-photo.png.png" alt="Pavan Showcase">
@@ -355,7 +329,6 @@
 
   </div>
 
-  <!-- SEARCH RESULT SECTION -->
   <div id="searchTab">
     <div class="card hidden" id="resultCard" style="margin-top: 10px;">
       <div class="profile-card-header">
@@ -379,7 +352,6 @@
     </div>
   </div>
 
-  <!-- ADMIN SECTION -->
   <div id="adminTab" class="hidden" style="margin-top: 10px;">
     <div class="card">
       <h3 style="margin-bottom: 5px; color: #002e6e;">Team Members Management</h3>
@@ -392,7 +364,7 @@
               <th>ID</th>
               <th>Name</th>
               <th>Status</th>
-              <th>Actions</th>
+              <th id="actionsHeader">Actions</th>
             </tr>
           </thead>
           <tbody id="adminTableBody"></tbody>
@@ -428,7 +400,6 @@
 
 </div>
 
-<!-- EDIT MODAL -->
 <div id="editModal" class="modal">
   <div class="modal-content">
     <h3 style="margin-bottom: 15px; color: #002e6e;">Edit Employee Details</h3>
@@ -474,6 +445,7 @@
 
   const ADMIN_PIN = "pavan9842";
   let teamDatabase = [];
+  let isAdminLoggedIn = false;
   let uploadedImageBase64New = "";
   let uploadedImageBase64Edit = "";
 
@@ -492,9 +464,24 @@
     document.querySelectorAll('.tab-btn')[1].classList.toggle('active', tab === 'admin');
   }
 
+  async function switchToAdminTab() {
+    if (!isAdminLoggedIn) {
+      const pin = prompt("Enter Admin PIN:");
+      if (await verifyPin(pin)) {
+        isAdminLoggedIn = true;
+        switchTab('admin');
+        renderAdminTable();
+      } else {
+        alert("Incorrect PIN!");
+      }
+    } else {
+      switchTab('admin');
+    }
+  }
+
   function searchUser() {
     const inputId = document.getElementById('searchInput').value.trim().toUpperCase();
-    const user = teamDatabase.find(item => item.id.toUpperCase() === inputId);
+    const user = teamDatabase.find(item => String(item.id).trim().toUpperCase() === inputId);
     if (user) {
       document.getElementById('errorText').style.display = 'none';
       document.getElementById('resultCard').classList.remove('hidden');
@@ -529,42 +516,54 @@
 
   function renderAdminTable() {
     const tbody = document.getElementById('adminTableBody');
+    const actionsHeader = document.getElementById('actionsHeader');
     tbody.innerHTML = '';
+
+    // ఒకవేళ అడ్మిన్ లాగిన్ అయి ఉంటేనే Actions కాలమ్ హెడ్ మరియు బటన్స్ కనిపిస్తాయి
+    if (isAdminLoggedIn) {
+      actionsHeader.style.display = '';
+    } else {
+      actionsHeader.style.display = 'none';
+    }
+
     teamDatabase.forEach((user, index) => {
       const tr = document.createElement('tr');
+      let actionsHtml = '';
+      
+      // అడ్మిన్ లాగిన్ అయితేనే ప్రతి రో లో యాక్షన్ బటన్స్ కనిపిస్తాయి
+      if (isAdminLoggedIn) {
+        actionsHtml = `
+          <td>
+            <button class="toggle-btn ${user.status === 'Active' ? 'btn-inactive-state' : 'btn-active-state'}" onclick="toggleStatus('${user.id}')">
+              ${user.status === 'Active' ? 'Deactivate' : 'Activate'}
+            </button>
+            <button class="toggle-btn btn-edit" onclick="openEditModal(${index})">Edit</button>
+            <button class="toggle-btn btn-danger" onclick="deleteMember('${user.id}')">Delete</button>
+          </td>
+        `;
+      }
+
       tr.innerHTML = `
         <td><img src="${user.photoUrl || 'https://via.placeholder.com/150'}" class="table-photo"></td>
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td><strong style="color: ${user.status === 'Active' ? '#15803d' : '#b91c1c'};">${user.status}</strong></td>
-        <td>
-          <button class="toggle-btn ${user.status === 'Active' ? 'btn-inactive-state' : 'btn-active-state'}" onclick="toggleStatus('${user.id}')">
-            ${user.status === 'Active' ? 'Deactivate' : 'Activate'}
-          </button>
-          <button class="toggle-btn btn-edit" onclick="openEditModal(${index})">Edit</button>
-          <button class="toggle-btn btn-danger" onclick="deleteMember('${user.id}')">Delete</button>
-        </td>
+        ${actionsHtml}
       `;
       tbody.appendChild(tr);
     });
   }
 
   async function toggleStatus(empId) {
-    const pin = prompt("Enter PIN:");
-    if (await verifyPin(pin)) {
-      const user = teamDatabase.find(u => u.id === empId);
-      const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
-      database.ref('employees/' + empId).update({ status: newStatus });
-    } else alert("Incorrect PIN!");
+    const user = teamDatabase.find(u => u.id === empId);
+    const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
+    database.ref('employees/' + empId).update({ status: newStatus });
   }
 
   async function deleteMember(empId) {
-    const pin = prompt("Enter PIN to delete this record:");
-    if (await verifyPin(pin)) {
-      if (confirm(`Are you sure you want to delete employee ID: ${empId}?`)) {
-        database.ref('employees/' + empId).remove();
-      }
-    } else alert("Incorrect PIN!");
+    if (confirm(`Are you sure you want to delete employee ID: ${empId}?`)) {
+      database.ref('employees/' + empId).remove();
+    }
   }
 
   function openEditModal(index) {
@@ -577,7 +576,7 @@
     document.getElementById('editDept').value = u.department;
     document.getElementById('editLocation').value = u.location;
     document.getElementById('editDoj').value = u.doj;
-    document.getElementById('editPhone').value = u.phone;
+    document.getElementById('editPhone').value, u.phone;
     document.getElementById('editBlood').value = u.bloodGroup;
     document.getElementById('editEmergency').value = u.emergencyContact;
     document.getElementById('editModal').style.display = 'flex';
@@ -587,8 +586,6 @@
 
   async function saveEditedMember(event) {
     event.preventDefault();
-    if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
-    
     const empId = document.getElementById('editId').value;
     const index = document.getElementById('editIndex').value;
     let photo = uploadedImageBase64Edit || document.getElementById('editPhotoUrl').value.trim() || teamDatabase[index].photoUrl;
@@ -609,8 +606,6 @@
 
   async function addNewMember(event) {
     event.preventDefault();
-    if (!await verifyPin(prompt("Enter PIN:"))) return alert("Incorrect PIN!");
-
     const id = document.getElementById('newId').value.trim().toUpperCase();
     let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'https://via.placeholder.com/150';
 
