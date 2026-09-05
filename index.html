@@ -292,7 +292,7 @@
 
       <div class="tabs" style="margin-bottom: 0;">
         <button class="tab-btn active" onclick="switchTab('search')">Employee Details View</button>
-        <button class="tab-btn" onclick="switchToAdminTab()">Team Status & Management</button>
+        <button class="tab-btn" onclick="switchTab('admin')">Team Status & Management</button>
       </div>
 
     </div>
@@ -364,7 +364,7 @@
               <th>ID</th>
               <th>Name</th>
               <th>Status</th>
-              <th id="actionsHeader">Actions</th>
+              <th>Actions <span style="font-size:11px; color:#ef4444; font-weight:normal;">🔒 (Locked)</span></th>
             </tr>
           </thead>
           <tbody id="adminTableBody"></tbody>
@@ -393,7 +393,7 @@
         <div class="form-group"><label>Mobile No.</label><input type="text" id="newPhone" required></div>
         <div class="form-group"><label>Blood Group</label><input type="text" id="newBlood" required></div>
         <div class="form-group"><label>Emergency Contact</label><input type="text" id="newEmergency" required></div>
-        <button type="submit" class="btn btn-dark" style="width: 100%; margin-top: 10px;">Save to Cloud Database</button>
+        <button type="submit" class="btn btn-dark" style="width: 100%; margin-top: 10px;" onclick="checkAdminBeforeAction(event, 'add')">Save to Cloud Database</button>
       </form>
     </div>
   </div>
@@ -445,7 +445,6 @@
 
   const ADMIN_PIN = "pavan9842";
   let teamDatabase = [];
-  let isAdminLoggedIn = false;
   let uploadedImageBase64New = "";
   let uploadedImageBase64Edit = "";
 
@@ -455,28 +454,16 @@
     renderAdminTable();
   });
 
-  async function verifyPin(inputPin) { return inputPin === ADMIN_PIN; }
+  async function verifyPin() {
+    const pin = prompt("🔐 Enter Admin Password to Access Action:");
+    return pin === ADMIN_PIN;
+  }
 
   function switchTab(tab) {
     document.getElementById('searchTab').classList.toggle('hidden', tab !== 'search');
     document.getElementById('adminTab').classList.toggle('hidden', tab !== 'admin');
     document.querySelectorAll('.tab-btn')[0].classList.toggle('active', tab === 'search');
     document.querySelectorAll('.tab-btn')[1].classList.toggle('active', tab === 'admin');
-  }
-
-  async function switchToAdminTab() {
-    if (!isAdminLoggedIn) {
-      const pin = prompt("Enter Admin PIN:");
-      if (await verifyPin(pin)) {
-        isAdminLoggedIn = true;
-        switchTab('admin');
-        renderAdminTable();
-      } else {
-        alert("Incorrect PIN!");
-      }
-    } else {
-      switchTab('admin');
-    }
   }
 
   function searchUser() {
@@ -516,70 +503,62 @@
 
   function renderAdminTable() {
     const tbody = document.getElementById('adminTableBody');
-    const actionsHeader = document.getElementById('actionsHeader');
     tbody.innerHTML = '';
-
-    // ఒకవేళ అడ్మిన్ లాగిన్ అయి ఉంటేనే Actions కాలమ్ హెడ్ మరియు బటన్స్ కనిపిస్తాయి
-    if (isAdminLoggedIn) {
-      actionsHeader.style.display = '';
-    } else {
-      actionsHeader.style.display = 'none';
-    }
-
     teamDatabase.forEach((user, index) => {
       const tr = document.createElement('tr');
-      let actionsHtml = '';
-      
-      // అడ్మిన్ లాగిన్ అయితేనే ప్రతి రో లో యాక్షన్ బటన్స్ కనిపిస్తాయి
-      if (isAdminLoggedIn) {
-        actionsHtml = `
-          <td>
-            <button class="toggle-btn ${user.status === 'Active' ? 'btn-inactive-state' : 'btn-active-state'}" onclick="toggleStatus('${user.id}')">
-              ${user.status === 'Active' ? 'Deactivate' : 'Activate'}
-            </button>
-            <button class="toggle-btn btn-edit" onclick="openEditModal(${index})">Edit</button>
-            <button class="toggle-btn btn-danger" onclick="deleteMember('${user.id}')">Delete</button>
-          </td>
-        `;
-      }
-
       tr.innerHTML = `
         <td><img src="${user.photoUrl || 'https://via.placeholder.com/150'}" class="table-photo"></td>
         <td>${user.id}</td>
         <td>${user.name}</td>
         <td><strong style="color: ${user.status === 'Active' ? '#15803d' : '#b91c1c'};">${user.status}</strong></td>
-        ${actionsHtml}
+        <td>
+          <button class="toggle-btn ${user.status === 'Active' ? 'btn-inactive-state' : 'btn-active-state'}" onclick="toggleStatus('${user.id}')">🔒 ${user.status === 'Active' ? 'Deactivate' : 'Activate'}</button>
+          <button class="toggle-btn btn-edit" onclick="openEditModal(${index})">🔒 Edit</button>
+          <button class="toggle-btn btn-danger" onclick="deleteMember('${user.id}')">🔒 Delete</button>
+        </td>
       `;
       tbody.appendChild(tr);
     });
   }
 
   async function toggleStatus(empId) {
-    const user = teamDatabase.find(u => u.id === empId);
-    const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
-    database.ref('employees/' + empId).update({ status: newStatus });
-  }
-
-  async function deleteMember(empId) {
-    if (confirm(`Are you sure you want to delete employee ID: ${empId}?`)) {
-      database.ref('employees/' + empId).remove();
+    if (await verifyPin()) {
+      const user = teamDatabase.find(u => u.id === empId);
+      const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
+      database.ref('employees/' + empId).update({ status: newStatus });
+    } else {
+      alert("❌ Incorrect Password! Action Cancelled.");
     }
   }
 
-  function openEditModal(index) {
-    const u = teamDatabase[index];
-    document.getElementById('editIndex').value = index;
-    document.getElementById('editId').value = u.id;
-    document.getElementById('editPhotoUrl').value = (u.photoUrl && u.photoUrl.startsWith('data:image')) ? '' : (u.photoUrl || '');
-    document.getElementById('editName').value = u.name;
-    document.getElementById('editRole').value = u.role;
-    document.getElementById('editDept').value = u.department;
-    document.getElementById('editLocation').value = u.location;
-    document.getElementById('editDoj').value = u.doj;
-    document.getElementById('editPhone').value, u.phone;
-    document.getElementById('editBlood').value = u.bloodGroup;
-    document.getElementById('editEmergency').value = u.emergencyContact;
-    document.getElementById('editModal').style.display = 'flex';
+  async function deleteMember(empId) {
+    if (await verifyPin()) {
+      if (confirm(`Are you sure you want to delete employee ID: ${empId}?`)) {
+        database.ref('employees/' + empId).remove();
+      }
+    } else {
+      alert("❌ Incorrect Password! Action Cancelled.");
+    }
+  }
+
+  async function openEditModal(index) {
+    if (await verifyPin()) {
+      const u = teamDatabase[index];
+      document.getElementById('editIndex').value = index;
+      document.getElementById('editId').value = u.id;
+      document.getElementById('editPhotoUrl').value = (u.photoUrl && u.photoUrl.startsWith('data:image')) ? '' : (u.photoUrl || '');
+      document.getElementById('editName').value = u.name;
+      document.getElementById('editRole').value = u.role;
+      document.getElementById('editDept').value = u.department;
+      document.getElementById('editLocation').value = u.location;
+      document.getElementById('editDoj').value = u.doj;
+      document.getElementById('editPhone').value = u.phone;
+      document.getElementById('editBlood').value = u.bloodGroup;
+      document.getElementById('editEmergency').value = u.emergencyContact;
+      document.getElementById('editModal').style.display = 'flex';
+    } else {
+      alert("❌ Incorrect Password! Action Cancelled.");
+    }
   }
 
   function closeModal() { document.getElementById('editModal').style.display = 'none'; }
@@ -602,32 +581,37 @@
       photoUrl: photo
     });
     closeModal();
+    alert("✅ Employee details updated successfully!");
   }
 
   async function addNewMember(event) {
     event.preventDefault();
-    const id = document.getElementById('newId').value.trim().toUpperCase();
-    let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'https://via.placeholder.com/150';
+    if (await verifyPin()) {
+      const id = document.getElementById('newId').value.trim().toUpperCase();
+      let photo = uploadedImageBase64New || document.getElementById('newPhotoUrl').value.trim() || 'https://via.placeholder.com/150';
 
-    const newMember = {
-      id: id,
-      photoUrl: photo,
-      name: document.getElementById('newName').value,
-      role: document.getElementById('newRole').value,
-      department: document.getElementById('newDept').value,
-      status: document.getElementById('newStatus').value,
-      location: document.getElementById('newLocation').value,
-      doj: document.getElementById('newDoj').value,
-      phone: document.getElementById('newPhone').value,
-      bloodGroup: document.getElementById('newBlood').value,
-      emergencyContact: document.getElementById('newEmergency').value
-    };
+      const newMember = {
+        id: id,
+        photoUrl: photo,
+        name: document.getElementById('newName').value,
+        role: document.getElementById('newRole').value,
+        department: document.getElementById('newDept').value,
+        status: document.getElementById('newStatus').value,
+        location: document.getElementById('newLocation').value,
+        doj: document.getElementById('newDoj').value,
+        phone: document.getElementById('newPhone').value,
+        bloodGroup: document.getElementById('newBlood').value,
+        emergencyContact: document.getElementById('newEmergency').value
+      };
 
-    database.ref('employees/' + id).set(newMember);
-    document.getElementById('addMemberForm').reset();
-    uploadedImageBase64New = "";
-    switchTab('search');
-    alert("Employee saved successfully to Cloud Database!");
+      database.ref('employees/' + id).set(newMember);
+      document.getElementById('addMemberForm').reset();
+      uploadedImageBase64New = "";
+      switchTab('search');
+      alert("✅ Employee saved successfully to Cloud Database!");
+    } else {
+      alert("❌ Incorrect Password! New employee registration cancelled.");
+    }
   }
 </script>
 
